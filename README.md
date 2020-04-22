@@ -5,82 +5,58 @@
 
 ## Overview
 
-Design and develop drop-in components or tool that can be used to augment the standard UI and improve the overall experience of a user. 
+The aim of this project is to enhance the functionality, experiment with new or scarcely used methods and improve the overall user experience for a typical 'article' page.
 
-You will complete this project in two phases:
-
-1. Design and prototype the components/tools outlined (A to D)
-2. Develop a functional version of each component/tool designed
 
 ## Setup
 
-To being, using HTML and CSS, write and style a document of content that's long enough to allow the browser to scroll at least five times longer than the height of the window (approximately) when using the browser's default font size.
+An article page would be built with HTML and CSS which is at least 5 times longer than the height of the user agent's viewport.
 
 
-## Practice Examples
-
-### Practice 1: Scroll progress indicator
-
-**Goal:** Create a visual progress indicator to show a user how much progress has been made for a given article.
-
-### Practice 2: Progress title
-
-**Goal:** Put the document's `<h1>` into the fixed top `.bar` when the heading has been scrolled off the page.
-
-### Practice 3: Word count
-
-**Goal:** Count the total number of words in the article. Determine the number of words per minute that you read. Combine these values to show the user how many minutes this article might take to read. "5 minutes". 
+## General Guide
 
 
-## Project Deliverables
+### Objective 1: Scroll progress indicator
 
-### A) Landmarks, orientation and scroll-spies
+**Goal:** A visual progress indicator will be created to give user estimate on his progress on an the article.
+	Bonus: 1. Mark indicator at 80% upwards to alert user he is close to completion.
+		   2. Make this indicator animated with a simple styling trick.
+		   3. Create a short horizontal slider right under the indicator that makes for vertical page scroll easy. If the page scroll is jumpy, 
+		   	  scroll would be done in chunks or by viewport height (as if the space bar was hit). If this tricky feature does not turn out well or 
+		   	  play nice with other browsers, it will be pulled.
 
-Design a way to represent a user's progress through a long article, such that they can easily view the article's outline and move a desired portion of the document into the viewport at any time. An example of a "srollspy" (see the "Table of Contents" in a desktop browser): https://create.arduino.cc/projecthub/MoritzDornseifer/iot-cloud-enabled-alarm-clock-1e5119
+### Objective 2: Progress title
 
-### B) Content reveal (carousel, slides, tabbed component, etc)
+**Goal:** The main title of the document is to remain in view at all times.
+	Bonus: 1. The article in this project will contain sub-topics and once a sub-topic heading is out of view, it will flash for every 5 minutes
+			  the user is absent-minded.
 
-Design a component that can guide a user though content that is split into multiple parts. The content may be controlled by the user, the component itself (a timer, perhaps), or other. The content may be of any type or medium (text content, images, videos, etc). An example of a slide deck style survey: http://thespeakerlab.typeform.com/to/mKgF8q
+### Objective 3: Word count
 
-### C) New content engagement (aka, "infinite" content)
+**Goal:** Average reading time to be counted. 
+	Bonus: 1. There is the average reading speed; however there are users who categorise themselves as fast or slow readers. Application will compute
+			  reading time estimate for the fast, slow and average reader.
 
-When a user reached the bottom of a document, maintain the fluidity of the experience and engagement by loading new content. This UX upgrade should focus on responsible engagement. Ensure the user is made aware of new content (either upcoming, or already loading) while promoting a seamless, low-friction, ethically responsible experience.
+### Objective 4: Scroll Spy
 
-### D) One component or tool of your choosing
+**Goal:** Method will be designed to represent user's progress through the long article, such that they can easily view the article's outline 
+		  and move a desired portion of the document into the viewport at any time.  
 
-Use your own experiences to design and develop a component or tool that will improve the experience of a user reading or viewing a website. Consider looking for inspirations on sites like Dribbble (or others) that demonstrate UI animations or related experience upgrades.
+### Objective 5: Content reveal (accordion)
 
-## Assessment variables and considerations
+**Goal:** A component will be designed to guide a user through content that is split into multiple parts. Content of article will be made deliberately 
+		  long to accomplish this task.
 
-You will be assessed on the following criteria:
+### Objective 6: Scroll-up button (accordion)
 
-- **Documentation**
-  - **Research**: keep a README.md file with inspirations, sketches, drawings, analysis of potential exceptions, pros/cons of each solution, etc
-  - **Code**: assess the problem, break down into tasks, document all functions, listeners, processes
-- **User interface**: colours, spacing, overall aesthetic/style
-- **User experience**: usability, value added, seamless integration
-- **Code structure**: indentation, names (variables and functions), readability, best practices
-- **Portability**: ease of scaled or the ability to be dropped into any website
-- **Collaboration**: distribution of work, research, management of code through git (including "Issues")
+**Goal:** As a result of creating a long article page, a scrollup button is ideal to enhance user experience; saving time to navigate to either top
+		  or bottom of document.
+	Bonus : 1. Create a unique scroll-up button that scrolls to middle of page, then mutates into two: any click on either of these buttons will take
+			user to either top or bottom of the page and re-squash into one.
 
-### Expected grade ranges are as follows:
-- 0-49%: Does not meet the project minimum requirements for all or some deliverables
-- 50-64%: Student work only meets the minimum requirement of all deliverables
-- 65-79%: Work quality meets all requirements and is on par with expectations based on the topics covered
-- 80%+: Student demonstrates the ability to improve efficiency and execution through the implementation of creative solutions and topics that go beyond topics covered in class
+### Objective 7: New content engagement (aka, "infinite" content)
 
-## Student Q&A
-
-[Submit your questions as "Issues" (click)](../../issues). This section will be continually updated. A few questions answered:
-
-- *Does the content of the article matter?*
-  - It should be unique and interesting, with images, formatting, fonts, etc. Try not to spend more than an hour or two (total) writing and styling it. To start, just use any content to get up and running quickly.
-- *What article should load when we get to the bottom of the page? (Deliverable C)*
-  - You will just reload the same content with a new heading.
-- *Can I combine two parts into one component?*
-  - Absolutely
-- *Does this have to be responsive to small screens (mobile)?*
-  - Ideally. The more responsive, the better the grade.
-
-
+**Goal:** When a user reaches the bottom of a document, maintain the fluidity of the experience and engagement by loading new content. Application to 
+		 ensure user experiences no nasty surprise by providing hint that fresh content is coming by way of a spinning loader (a simple gif image) 
+		 combined with the help of fading text.
 
