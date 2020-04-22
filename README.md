@@ -19,8 +19,11 @@ An article page would be built with HTML and CSS which is at least 5 times longe
 ### Objective 1: Scroll progress indicator
 
 **Goal:** A visual progress indicator will be created to give user estimate on his progress on an the article.
+
 	Bonus: 1. Mark indicator at 80% upwards to alert user he is close to completion.
+
 		   2. Make this indicator animated with a simple styling trick.
+
 		   3. Create a short horizontal slider right under the indicator that makes for vertical page scroll easy. If the page scroll is jumpy, 
 		   	  scroll would be done in chunks or by viewport height (as if the space bar was hit). If this tricky feature does not turn out well or 
 		   	  play nice with other browsers, it will be pulled.
@@ -28,12 +31,14 @@ An article page would be built with HTML and CSS which is at least 5 times longe
 ### Objective 2: Progress title
 
 **Goal:** The main title of the document is to remain in view at all times.
+
 	Bonus: 1. The article in this project will contain sub-topics and once a sub-topic heading is out of view, it will flash for every 5 minutes
 			  the user is absent-minded.
 
 ### Objective 3: Word count
 
 **Goal:** Average reading time to be counted. 
+
 	Bonus: 1. There is the average reading speed; however there are users who categorise themselves as fast or slow readers. Application will compute
 			  reading time estimate for the fast, slow and average reader.
 
@@ -51,6 +56,7 @@ An article page would be built with HTML and CSS which is at least 5 times longe
 
 **Goal:** As a result of creating a long article page, a scrollup button is ideal to enhance user experience; saving time to navigate to either top
 		  or bottom of document.
+		  
 	Bonus : 1. Create a unique scroll-up button that scrolls to middle of page, then mutates into two: any click on either of these buttons will take
 			user to either top or bottom of the page and re-squash into one.
 
