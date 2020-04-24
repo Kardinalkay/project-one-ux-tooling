@@ -1,54 +1,91 @@
-body {
-  font: 1em helvetica, arial, sans-serif;
-  background-color: #fff;
-  color: #222;
-}
+/*
 
-h1 {
-  background-color: tomato;
-  top: 0;
-  left: 0;
-  transition: all 0.5s;
-}
+* Project Title: PROJECT: UX TOOLING 
+* Author Email: kayodeibiyemi92@gmail.com
+* GitHub Link: https://github.com/Kardinalkay/project-one-ux-tooling
+* Author URI: www.codesector.com
+* Start date: 20-4-2020
+  __   __                           
+ |  |_/  /
+ |      / 
+ |     /    __ ____  __
+ |  '  \  / _` | |  | |          
+ |  |\  \| (_| | |__| |
+ |__| \__\\__,_|____. |         
+                    | |  
+                    | |
+              |_______|  
+                                                                  
+=====================================================================*/
 
-.fixed {
-  position: fixed;
-  font-size: 1em;
+/*basic*/
+
+:root {
+  /*primary colours*/
+  --blue: #000033;
+  --yellow: #DEB406;
+  --link: #007BFF;
+
+  /*shades of grey*/
+  --grey: #222;
+  --light_grey: #efefef;
+  --mid_grey: #f2f2f2;
+  --black: #000;
+  --white: #fff;
+
+  /*font families*/
+  --font_primary: "Khand", Tahoma, Calibri, sans-serif;
+  --font_secondary: Space Mono, Tahoma, Calibri, sans-serif;
+  --font_tertiary: "Century Gothic", Tahoma, Calibri, sans-serif;
+}
+*, *:before, *:after {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 100%;
+}
+body{
+  font-weight: 400;
+  line-height: 1.5;
+  min-width: 320px;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+  font-family: var(--font_primary);
+}
+
+/*Link styles*/
+a {
+   color: var(--link);
+   text-decoration: none;
+   background-color: transparent;
+   transition: 200ms;
+}
+a:hover, a:focus {
+  color: #d9534f;
+  text-decoration: none;
+  outline: none;
+}
+
+/*Lists*/
+ul, ol {
+  list-style: none;
+}
+ul li:not(header ul li) {
+  margin-bottom: 1em;
+}
+ul li:last-of-type {
+  margin-right: 0;
+}
+
+
+/*document*/
+
+.page {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: min-content;
   width: 100%;
-}
-
-
-.heading {
-  opacity: 0;
-  transition: opacity 1s;
-}
-.show {
-  opacity: 1;
-}
-
-.story {
-  padding: 0 1em;
-  margin: 1em 0;
-}
-
-.progress {
-  /* background-color: limegreen; */
-  background: linear-gradient(90deg, rgba(140,185,25,1) 0%, rgba(0,212,255,1) 100%);
-  background-size: 300vw;
-  background-position: -200vw;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 1em;
-  overflow: hidden;
-  opacity: 0;
-}
-
-.dot {
-  height: 3px;
-  width: 3px;
-  position: fixed;
-  background-color: red;
 }

@@ -30,21 +30,29 @@
     <body>
 
         <div class="page">
+
+            <header id="main-header" class="main-header" role="banner">
+                <a class="homelink-brand" href="index.html"><img src="img/humber-logo.png" alt="Humber Logo"></a>
+                <h1>WDDM 117 - Web Design Plan & Prototyping</h1>
+                <i class="fa fa-search"></i>
+            </header>
           
-            <div>
+            <section id="scroll-widget">
+
                 <label for="scroll-indicator">Scroll indicator:</label>
                 <progress id="scroll-indicator" class="scroll-indicator" role="progressbar" aria-busy="true" value="0" max="100" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">              
                     <div class="progress">
                       <span class="progress-bar" style="width: 20%;"></span>
                     </div>
                 </progress> 
-            </div>
 
-            <header>
-              <a class="homelink-brand" href="index.html"><img src="img/humber-logo.png" alt="Humber Logo"></a>
-              <h1>WDDM 117 - Web Design Plan & Prototyping</h1>
-              <i class="fa fa-search"></i>
-            </header>
+                <div class="scroll-container">
+                    <input type="range" min="1" max="100" value="50" class="slider" id="article-scroller">
+                </div>
+
+                <output id="result">60</output>
+
+            </section>
             
             <main>
 
