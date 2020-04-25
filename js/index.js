@@ -6,7 +6,9 @@
     1b. When panel is visible, give user indication with the caret symbol by adding a class
 
 2. PROGRESSBAR
-    2a. 
+    2a. Listen to scroll on the window and compute the amount scrolled as percentage of maximum
+        scrollable height in percentage terms.
+    2b. Set the value and aria values to progressbar.
 
 
 */
@@ -55,19 +57,26 @@
             
             progressBar : function () {
                 
-                const progress = (opts.progressbar.progress);            
-                const $progress = document.querySelector(progress);
+                let progress = (opts.progressbar.progress);            
+                let $progress = document.querySelector(progress);
                               
-                const windowH = window.innerHeight;   // window Height
-                const documentH = document.documentElement.scrollHeight;  // document Height
-                const amtScrolled = window.scrollY    // amtScrolled
-                const ttlAvailable = documentH - windowH  // How much CAN be scrolled
-                const percent = amtScrolled / ttlAvailable  // What percentage of the scrollable is scrolled : 0.5
-                            
-                console.log($progress);
+                let windowH = window.innerHeight;   // window Height
                 
+                // 2a. 
                 window.addEventListener('scroll', event => {
-                }
+                    let documentH = document.documentElement.scrollHeight;  // document Height (must always be inside event)
+                    
+                    let amtScrolled = window.scrollY    // amtScrolled
+                    let ttlAvailable = documentH - windowH  // How much CAN be scrolled
+                    let percent = amtScrolled / ttlAvailable  // What percentage of the scrollable is scrolled : 0.5
+                    
+                    let progressWidth = percent * 100;
+                    
+                    //2b. 
+                    $progress.value = progressWidth;    // set width of progressbar
+                    $progress.setAttribute("aria-valuenow", value); // set aria-width
+                    
+                });
             
             }
 
