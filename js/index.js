@@ -5,6 +5,10 @@
     1a. Listen for click on accordion-header and slide corresponding text down / up
     1b. When panel is visible, give user indication with the caret symbol by adding a class
 
+2. PROGRESSBAR
+    2a. Listen to scroll on the window and compute the amount scrolled as percentage of maximum
+        scrollable height in percentage terms.
+    2b. Set the value and aria values to progressbar.
 
 
 */
@@ -22,8 +26,8 @@
                 let $body = (opts.accordion.body);
 
                 //1a. 
-                var artcl = document.querySelectorAll($body);           // body
-                var artclHead = document.querySelectorAll($heading);   // heading
+                const artcl = document.querySelectorAll($body);           // body
+                const artclHead = document.querySelectorAll($heading);   // heading
 
                 for (let i = 0; i < artclHead.length; i++) {    // cycle through accordion headers
                     artclHead[i].addEventListener('click', function() {
@@ -49,6 +53,31 @@
                     
                 }
 
+            },
+            
+            progressBar : function () {
+                
+                let progress = (opts.progressbar.progress);            
+                let $progress = document.querySelector(progress);
+                              
+                let windowH = window.innerHeight;   // window Height
+                
+                // 2a. 
+                window.addEventListener('scroll', event => {
+                    let documentH = document.documentElement.scrollHeight;  // document Height (must always be inside event)
+                    
+                    let amtScrolled = window.scrollY    // amtScrolled
+                    let ttlAvailable = documentH - windowH  // How much CAN be scrolled
+                    let percent = amtScrolled / ttlAvailable  // What percentage of the scrollable is scrolled : 0.5
+                    
+                    let progressWidth = percent * 100;
+                    
+                    //2b. 
+                    $progress.value = progressWidth;    // set width of progressbar
+                    $progress.setAttribute("aria-valuenow", value); // set aria-width
+                    
+                });
+            
             }
 
         }
@@ -59,11 +88,23 @@
         accordion : {
             heading: '.body-component > a',
             body: '.body-component',
+        },
+        progressbar : {
+            progress: '.scroll-indicator',
         }
     }
     
     let article = doArticle(opts);
 
-    article.accordion();
+    try {
+        article.accordion();
+        article.progressBar();
+    } catch (e) {
+        console.warn("You have some error(s):")
+        console.log(e.name);
+        console.error(e.name);
+    }
+
+
    
     
