@@ -56,7 +56,7 @@
   white-space: nowrap;
   border: 0;
 }
-.img-component {
+.img-component:not(aside[role=complementary] .img-component) {
   margin: 0 auto 20px;
 }
 html {
@@ -257,7 +257,6 @@ main {
 }
 aside[role="complementary"] {
   grid-column: 10 / span 3;
-  border: 1px solid gold;
 }
 
 /*article*/
@@ -307,7 +306,7 @@ aside[role="complementary"] {
     position: relative;
     top: -7px;
 }
-.content-header h2 {
+.content-header h2, .sidebar-primary-heading {
   color: #000;
   font-size: 36px;
   line-height: 38px;
@@ -356,7 +355,45 @@ aside[role="complementary"] {
 .body-component .arrow {
   display: none;
 }
+.sidebar-primary-heading {
+  font-size: 1.5em;
+}
+.post-listing-item {
+  padding: 16px 0;
+  display: block;
+  border-top: 1px solid #efefef;
+}
+.post-list-link {
+  display: flex;
+  flex-flow: row nowrap;
+  color: var(--black);
+}
+.post-list-link:active, .post-list-link:hover, .post-list-link:focus {
+  color: var(--black);
+}
+.post-listing-list-description {
+  padding: 0 5px;
+}
+.post-listing-category {
+  color: #666;
+  font-size: .8em;
+  margin-bottom: .85em;
+  font-family: var(--font-secondary);
+  text-transform: uppercase;
+}
+.post-listing-list-item {
+  text-overflow: ellipsis;
+  max-height: 47px;
 
-[id*="open-accordion"]:after, [id*="close-accordion"]:after {
+  padding: 16px 0;
+  font-family: Oswald, sans-serif;
+}
+.post-listing-list-item:first-child {
+  border-top: 0;
+}
 
+aside[role="complementary"] .byline-component-aside{
+  font-size: 1em;
+  letter-spacing: 0;
+  margin-top: 7px;
 }
