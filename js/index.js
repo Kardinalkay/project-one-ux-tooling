@@ -64,6 +64,14 @@
     
     let article = doArticle(opts);
 
-    article.accordion();
+    try {
+        article.accordion();
+    } catch (e) {
+        console.warn("You have some error(s):")
+        console.log(e.name);
+        console.error(e.name);
+    }
+
+
    
     
