@@ -1,37 +1,69 @@
-
 /*
 
 1. ACCORDION
 
     1a. Listen for click on accordion-header and slide corresponding text down / up
-
+    1b. When panel is visible, give user indication with the caret symbol by adding a class
 
 
 
 */
 
 
-    var article = function(name) {
+    const doArticle = function(opts) {
 
-        var sex;
+        var sec;
+        
+        return {
 
-            return {
+            accordion : function () {
                 
-                accordion : function () {
-                    //let artcl = document.querySelectorAll('.body-component');
-                    let artclHead = document.querySelectorAll('.body-component > a');
+                let $heading = (opts.accordion.heading);
+                let $body = (opts.accordion.body);
+
+                //1a. 
+                var artcl = document.querySelectorAll($body);           // body
+                var artclHead = document.querySelectorAll($heading);   // heading
+
+                for (let i = 0; i < artclHead.length; i++) {    // cycle through accordion headers
+                    artclHead[i].addEventListener('click', function() {
+                        let el = this;
+                        togglePanel(el);
+                });
+
+
+                function togglePanel (el) {
                     
-                    for (i = 0; i < artclHead.length; i++) {
-                        artclHead[i].addEventListener('click', togglePanel, false);
-                    }
+                    event.preventDefault();
+                    //1b. 
                     
-                    function togglePanel () {
-                        
-                    }
+                    let bodyComponent = el.parentNode.className;  // get parent class                    
+                    for (let i = 0; i < artcl.length; i++) {    // close all panels
+                        artcl[i].className = 'body-component close';
+                    } 
+                                        
+                    // toggle on click                                        
+                    (bodyComponent == 'body-component close') ? el.parentNode.className = 'body-component open' : el.parentNode.className = 'body-component close';
+
+                    }   
                     
                 }
-          }
+
+            }
+
+        }
 
     }
+    
+    const opts = {
+        accordion : {
+            heading: '.body-component > a',
+            body: '.body-component',
+        }
+    }
+    
+    let article = doArticle(opts);
 
+    article.accordion();
+   
     
