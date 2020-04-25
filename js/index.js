@@ -9,6 +9,9 @@
     2a. Listen to scroll on the window and compute the amount scrolled as percentage of maximum
         scrollable height in percentage terms.
     2b. Set the value and aria values to progressbar.
+    2c. If progress width is above 80%, add a class that gives user visual indication he's 
+        almost done with the content. This indication will be a delegated CSS class that will
+        increase the filter blur on the element as well as increase it's blink rate (animation speed)
 
 
 */
@@ -70,11 +73,15 @@
                     let ttlAvailable = documentH - windowH  // How much CAN be scrolled
                     let percent = amtScrolled / ttlAvailable  // What percentage of the scrollable is scrolled : 0.5
                     
-                    let progressWidth = percent * 100;
+                    let progressWidth = Math.round(percent * 100);
                     
                     //2b. 
                     $progress.value = progressWidth;    // set width of progressbar
-                    $progress.setAttribute("aria-valuenow", value); // set aria-width
+                    $progress.setAttribute("aria-valuenow", progressWidth); // set aria-width
+                    
+                    //2c. 
+                    console.log($progress);
+                    (progressWidth > 80) ? $progress.className = 'scroll-indicator concluding' : $progress.className = 'scroll-indicator';
                     
                 });
             
