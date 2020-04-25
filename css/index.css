@@ -260,12 +260,16 @@ main {
 }
 .nav-article {
   grid-column: 1 / span 3;
+  position: fixed;
+  max-width: 25%;
   padding: 20px;
 }
 .parent-nav {
   border-top: 10px solid var(--black);
   padding-top: 20px;
   margin-top: -20px;
+  height: 80vh;
+  overflow: auto;
 }
 .parent-nav > li {
   padding: 5px 0;
