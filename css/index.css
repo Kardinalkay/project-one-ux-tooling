@@ -172,7 +172,9 @@ header[role=banner] .fa-search {
 }
 progress::-webkit-progress-bar {
     background-color: var(--blue);
-    background: var(--blue);
+}
+progress.concluding::-webkit-progress-bar {
+  background-color: red;
 }
 progress::-moz-progress-bar { 
   background-color: var(--blue);  
@@ -203,11 +205,17 @@ progress::-webkit-progress-value {
   background: linear-gradient(to right, var(--yellow), var(--blue));
   filter: blur(10px);
 }
+.concluding.scroll-indicator:before, .concluding.scroll-indicator:after {
+  opacity: .8;
+}
 .scroll-indicator:after {
   filter: blur(30px);
 }
 .scroll-indicator {
   animation: progress-glow 5s linear infinite;
+}
+.scroll-indicator.concluding {
+  animation-duration: 4s;
 }
 @keyframes progress-glow {
   0%, 100% {
