@@ -2,9 +2,11 @@
 
 1. ACCORDION
 
-    1a. Listen for click on accordion-header and slide corresponding text down / up
+    1a. Listen for click on accordion-header and slide corresponding text down / up.
     1b. When panel is visible, give user indication with the caret symbol by adding a class.
-    1c. When navigation link is clicked, save its href value, prevent default action
+    1c. When navigation link is clicked, save its href value, prevent default action.
+    1d. Select target, and if .sub-text, select parent accordion tab and trigger click.
+    1e. If .text, then skip selection of parent accordion and trigger click on this very target.
 
 2. PROGRESSBAR
     2a. Listen to scroll on the window and compute the amount scrolled as percentage of maximum
@@ -71,15 +73,27 @@
                     
                 };
                 
+                // 1c.
                 
                 let $activeLink = document.querySelectorAll('ul.parent-nav li a');  // Select nav links
-                console.log($activeLink);
                                                         
                 for (let i = 0; i < $activeLink.length; i++) {
-                    $activeLink[i].addEventListener('click', function () {  // Listen to click on navigation menu link
+                    
+                    $activeLink[i].addEventListener('click', function () {  // Listen to click on navigation menu link                        
                         event.preventDefault();
+                        
                         let href = this.href.split("#")[1]; // get the hash part of the href
-                        href += '#' + href; // add octothorpe back
+                        href = '#' + href; // add octothorpe back
+                        console.log(href);
+                        
+                        // 1d. 
+                        let $target = document.querySelector(href);
+                        let $accTab = $target.parentNode.parentNode.parentNode;
+                        console.log($target);
+                        console.log($accTab);
+                        
+                        // 1e.
+                        $accTab.click();   // trigger click on parent
                         
                         
                     });
