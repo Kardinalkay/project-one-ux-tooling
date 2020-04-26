@@ -21,13 +21,13 @@
           will be relatively straightforward because the <a> tag already references them with the
           href attribute.
       3b. Test if each element is in view but also importantly, out of view. An element is definitely
-          in view if it's offset to the top is equal to that of the viewport's pageYOffset. This is 
+          in view if it's offset to the top is 0. This is 
           the definition of 'in view' in this case, regardless of if the element has an opacity of 0,
           has visibility hidden or is behind another element. And because the window's pageYOffset 
           changes on the scroll event, it must be inside the scroll function.
-      3c. For each element that passes the 'in view' test, first 'unstyle' and active link.
+      3c. For each element that passes the 'in view' test, first 'unstyle' any active link.
           ii. Then find it's corresponding link in the navigation pane and highlight it.
-          iii. And if not in view, make inactive.
+      3d. Ensure that only 1 link is styled at a time by halting the loop once a target is in view
 
 */
 
@@ -52,7 +52,6 @@
                         let el = this;
                         togglePanel(el);
                 });
-
 
                 function togglePanel (el) {
                     
@@ -108,36 +107,38 @@
                 let $subtext = (opts.scrollspy.subtext);                
                 let windowH = window.innerHeight;
                 
-                const $targets = document.querySelectorAll($text + ', ' + $subtext);
                 //console.log($targets);
                 
                 window.addEventListener('scroll', event =>  {   // listen to scroll on window
                     
                     let $activeLinks = document.querySelectorAll('ul.parent-nav li a.active');
-                    console.log($activeLinks);
+                    const $targets = document.querySelectorAll($text + ', ' + $subtext);
                     
                     let documentH = document.documentElement.scrollHeight;  // document Height (must always be inside event)
                     
-                    let amtScrolled = window.scrollY    // amtScrolled
-                    let ttlAvailable = documentH - windowH  // How much CAN be scrolled                   
-                    
-                    $targets.forEach ((el, index) => { 
+                    let amtScrolled = Math.round(window.scrollY);    // amtScrolled
+
+                    for (let i = 0; i < $targets.length; i++) {
+                        
+                        let el = ($targets[i]);
+                        
+                        console.log($targets[i]);
                         
                         let $id = el.id;   // cache target IDs for each element
-                        //console.log("$id ", $id);
                         
                         // How tall is the $heading?
-                        let hHeight = el.getBoundingClientRect().height
+                        let hHeight = Math.round(el.getBoundingClientRect().height);
 
                         // How far is the element from the top
-                        let hFromTop = el.getBoundingClientRect().top
+                        let hFromTop = Math.round(el.getBoundingClientRect().top);
                         
                         // 3b.
-
-                        if (amtScrolled >= hFromTop && amtScrolled < hFromTop + hHeight) {
+                        // Account for 125px padding-top on body used to cater for the floating 
+                        // header and widget panel
+                        if (hFromTop > 125 && hFromTop < 425) { 
                             
+                            //alert (hFromTop + "," + (amtScrolled) + ", " + $id);
                             // 3ci.
-                            
                             if ($activeLinks) {
                                 $activeLinks.forEach ((link, index) => {
                                     link.classList.remove("active");
@@ -148,9 +149,13 @@
                             // 3cii.
                             let $activeLinkNew = document.querySelector('ul.parent-nav li a[href="#' + $id + '"]');
                             $activeLinkNew.classList.add("active");
+                            
+                            // 3d.
+                            break;
+                           
                         }
-
-                    }); 
+                       
+                    }; 
                 
                     
                 });
