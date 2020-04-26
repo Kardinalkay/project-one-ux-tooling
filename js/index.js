@@ -10,6 +10,7 @@
         so account for this and find a way to accordion-header to trigger click on it.
     1f. Remove active class responsible for styling link, for any new link clicked.
     1g. Also remove focus on all previously clicked links for any new link clicked to prevent confusion.
+    1h. Only trigger click if the tab is closed
 
 2. PROGRESSBAR
     2a. Listen to scroll on the window and compute the amount scrolled as percentage of maximum
@@ -86,10 +87,10 @@
                         
                         event.preventDefault();
                         
-                        let el = ($activeLink[i]);
-                        
-                        let $id = el.id;   // cache target IDs for each element
-                                            
+                        let href = this.href.split("#")[1]; // get the hash part of the href
+                        href = '#' + href; // add octothorpe back
+                        // console.log(href);  // #understand-competition
+                          
                         let $activeLinks = document.querySelectorAll('ul.parent-nav li a.active');
                         
                         // 1f.
@@ -102,16 +103,16 @@
                         }
 
                         
-                        let $activeLinkNew = document.querySelector('ul.parent-nav li a[href="#' + $id + '"]');
+                        let $activeLinkNew = document.querySelector('ul.parent-nav li a[href="' + href + '"]');
                         $activeLinkNew.classList.add("active");
-                                                
-                        let href = this.href.split("#")[1]; // get the hash part of the href
-                        href = '#' + href; // add octothorpe back
-                        // console.log(href);  // #understand-competition
-                                                
+                        
                         // 1d. 
-                        let $target = document.querySelector(href); // 
+                        let $target = document.querySelector(href);  
                         let $accTab = '';
+                        
+                        //1h.
+                        let $panelOpen = false;
+                        let $bodyComponent = '';
                         
                         // 1e. If it was a sub-link that was clicked, then go to its destination and travel up the 
                         // DOM tree to find the accordion head, and trigger-click. 
@@ -119,7 +120,9 @@
                         // But if it was parent link that was clicked, no need to climb the DOM because it links 
                         if ($activeLink[i].parentNode.parentNode.classList.contains('parent-nav')) {   // test if parent link
                             $accTab = $target.children[0].children[0];
-                            console.log($accTab);
+                            $bodyComponent = ($accTab.parentElement).classList.contains('close');
+                            console.log($bodyComponent);
+                            // console.log($accTab);
                                                     
                         } else {
                             $accTab = $target.parentNode.parentNode.previousElementSibling;
@@ -127,8 +130,11 @@
                             //console.log($accTab);   // <a href="#understand-competition"></a>   
                         }
                         
-                        $accTab.click();   // trigger click on accordion tab
-
+                        // Only if the panel is closed should a click be triggered to open it                         
+                        if ($bodyComponent) {   //1h. 
+                            $accTab.click();   // trigger click on accordion tab    
+                        }
+                        
                     });
                 }
 
