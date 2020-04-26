@@ -10,8 +10,10 @@
         so account for this and find a way to accordion-header to trigger click on it.
     1f. Remove active class responsible for styling link, for any new link clicked.
     1g. Also remove focus on all previously clicked links for any new link clicked to prevent confusion.
-    1h. Only trigger click if the tab is closed
-
+    1h. Only trigger click if the tab is closed.
+    1i. Otherwise, finally scroll the element into view by scrolling the document its pageOffsetY 
+        + the element's offset top's value
+    
 2. PROGRESSBAR
     2a. Listen to scroll on the window and compute the amount scrolled as percentage of maximum
         scrollable height in percentage terms.
@@ -83,11 +85,16 @@
 
                 for (let i = 0; i < $activeLink.length; i++) {
                     
-                    $activeLink[i].addEventListener('click', function () {  // Listen to click on navigation menu link 
+                    $activeLink[i].addEventListener('click', function() {
+                        let el = this;
+                        activatePanel(el);
+                    });
+                                                    
+                    function activatePanel (el, defaultBehaviour=false) {  // Listen to click on navigation menu link 
                         
                         event.preventDefault();
                         
-                        let href = this.href.split("#")[1]; // get the hash part of the href
+                        let href = el.href.split("#")[1]; // get the hash part of the href
                         href = '#' + href; // add octothorpe back
                         // console.log(href);  // #understand-competition
                           
@@ -120,8 +127,7 @@
                         // But if it was parent link that was clicked, no need to climb the DOM because it links 
                         if ($activeLink[i].parentNode.parentNode.classList.contains('parent-nav')) {   // test if parent link
                             $accTab = $target.children[0].children[0];
-                            $bodyComponent = ($accTab.parentElement).classList.contains('close');
-                            console.log($bodyComponent);
+                            //console.log($bodyComponent);
                             // console.log($accTab);
                                                     
                         } else {
@@ -131,11 +137,23 @@
                         }
                         
                         // Only if the panel is closed should a click be triggered to open it                         
-                        if ($bodyComponent) {   //1h. 
-                            $accTab.click();   // trigger click on accordion tab    
+                        $bodyComponent = ($accTab.parentElement).classList.contains('close');
+                        if ($bodyComponent) {
+                            $accTab.click();   // trigger click on accordion tab   
                         }
                         
-                    });
+                        // 1i. 
+                        //element in view would be its offset to window top + windows offset to document top
+                        $scrollIntoView = $target.getBoundingClientRect().top + window.scrollY;
+                        // console.log($scrollIntoView);
+                        
+                        window.scrollTo({
+                            top: Math.round($scrollIntoView),
+                            left: 0,
+                            behaviour: 'smooth'
+                        });
+                                                
+                    };
                 }
 
             },
