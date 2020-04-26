@@ -21,6 +21,9 @@
         the definition of 'in view' in this case, regardless of if the element has an opacity of 0,
         has visibility hidden or is behind another element. And because the window's pageYOffset 
         changes on the scroll event, it must be inside the scroll function.
+    3c. For each element that passes the 'in view' test, first 'unstyle' and active link.
+        ii. Then find it's corresponding link in the navigation pane and highlight it.
+        
     
 
 
@@ -100,8 +103,11 @@
                 
                 // 3a.                
                 let $text = (opts.scrollspy.text);
-                let $subtext = (opts.scrollspy.subtext);
-                let windowH = window.innerHeight
+                let $subtext = (opts.scrollspy.subtext);                
+                let $activeLinks = (opts.scrollspy.links);
+                console.log($activeLinks);
+
+                let windowH = window.innerHeight;
                 
                 const $targets = document.querySelectorAll($text + ', ' + $subtext);
                 //console.log($targets);
@@ -116,6 +122,7 @@
                     $targets.forEach ((el, index) => { 
                         
                         let $id = el.id;   // cache target IDs for each element
+                        console.log("$id ", $id);
                         
                         // How tall is the $heading?
                         let hHeight = el.getBoundingClientRect().height
@@ -126,13 +133,22 @@
                         // 3b.
 
                         if (amtScrolled >= hFromTop && amtScrolled < hFromTop + hHeight) {
-                            if ($id==='understand-design-problem') {
-                                alert ('IN VIEW');
+                            
+                            // 3ci.
+                            
+                            if ($activeLinks) {
+                                $activeLinks.forEach ((link, index) => {
+                                    link.classList.remove("active");
+                                });
                             }
+
+                            
+                            // 3cii.
+                            let $activeLinkNew = document.querySelector('ul.parent-nav li a[href="#' + $id + '"]');
+                            $activeLinkNew.classList.add("active");
                         }
 
-                        //console.log($id);
-                }); 
+                    }); 
                 
                     
                 });
@@ -146,14 +162,15 @@
     const opts = {
         accordion : {
             heading: '.body-component > a',
-            body: '.body-component',
+            body: '.body-component'
         },
         progressbar : {
-            progress: '.scroll-indicator',
+            progress: '.scroll-indicator'
         },
         scrollspy : {
             text: '.article-accordion > li',
-            subtext: '.sub-text'
+            subtext: '.sub-text',
+            activeLinks: document.querySelectorAll('ul.parent-nav li a.active')
         }
     }
     
