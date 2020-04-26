@@ -3,7 +3,8 @@
 1. ACCORDION
 
     1a. Listen for click on accordion-header and slide corresponding text down / up
-    1b. When panel is visible, give user indication with the caret symbol by adding a class
+    1b. When panel is visible, give user indication with the caret symbol by adding a class.
+    1c. When navigation link is clicked, save its href value, prevent default action
 
 2. PROGRESSBAR
     2a. Listen to scroll on the window and compute the amount scrolled as percentage of maximum
@@ -27,7 +28,7 @@
           changes on the scroll event, it must be inside the scroll function.
       3c. For each element that passes the 'in view' test, first 'unstyle' any active link.
           ii. Then find it's corresponding link in the navigation pane and highlight it.
-      3d. Ensure that only 1 link is styled at a time by halting the loop once a target is in view
+      3d. Ensure that only 1 link is styled at a time by halting the loop once a target is in view.
 
 */
 
@@ -68,6 +69,20 @@
 
                     }   
                     
+                };
+                
+                
+                let $activeLink = document.querySelectorAll('ul.parent-nav li a');  // Select nav links
+                console.log($activeLink);
+                                                        
+                for (let i = 0; i < $activeLink.length; i++) {
+                    $activeLink[i].addEventListener('click', function () {  // Listen to click on navigation menu link
+                        event.preventDefault();
+                        let href = this.href.split("#")[1]; // get the hash part of the href
+                        href += '#' + href; // add octothorpe back
+                        
+                        
+                    });
                 }
 
             },
@@ -122,8 +137,6 @@
                         
                         let el = ($targets[i]);
                         
-                        console.log($targets[i]);
-                        
                         let $id = el.id;   // cache target IDs for each element
                         
                         // How tall is the $heading?
@@ -145,7 +158,6 @@
                                 });
                             }
 
-                            
                             // 3cii.
                             let $activeLinkNew = document.querySelector('ul.parent-nav li a[href="#' + $id + '"]');
                             $activeLinkNew.classList.add("active");
@@ -169,7 +181,8 @@
     const opts = {
         accordion : {
             heading: '.body-component > a',
-            body: '.body-component'
+            body: '.body-component',
+            navlink: ''
         },
         progressbar : {
             progress: '.scroll-indicator'
