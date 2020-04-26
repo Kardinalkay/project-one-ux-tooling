@@ -16,6 +16,11 @@
         to get the IDs of every text or sub-text and tie the connection to the <a> elements. This
         will be relatively straightforward because the <a> tag already references them with the
         href attribute.
+    3b. Test if each element is in view but also importantly, out of view. An element is definitely
+        in view if it's offset to the top is equal to that of the viewport's pageYOffset. This is 
+        the definition of 'in view' in this case, regardless of if the element has an opacity of 0,
+        has visibility hidden or is behind another element. And because the window's pageYOffset 
+        changes on the scroll event, it must be inside the scroll function.
     
 
 
@@ -93,19 +98,41 @@
             
             scrollspy : function () {
                 
-                // 3a.
-                
+                // 3a.                
                 let $text = (opts.scrollspy.text);
                 let $subtext = (opts.scrollspy.subtext);
                 
                 const $targets = document.querySelectorAll($text + ', ' + $subtext);
                 //console.log($targets);
                 
-                $targets.forEach ((element, index) => {    
-                    let $id = element.id;
+                window.addEventListener('scroll', event =>  {   // listen to scroll on window
                     
-                    //console.log($id);
+                    let documentH = document.documentElement.scrollHeight;  // document Height (must always be inside event)
+                    
+                    let amtScrolled = window.scrollY    // amtScrolled
+                    let ttlAvailable = documentH - windowH  // How much CAN be scrolled                   
+                    
+                    $targets.forEach ((el, index) => { 
+                        
+                        let $id = el.id;   // cache target IDs for each element
+                        
+                        // How tall is the $heading?
+                        let hHeight = el.getBoundingClientRect().height
+
+                        // How far is the element from the top
+                        let hFromTop = el.getBoundingClientRect().top
+                        
+                        // 3b.
+
+                        if (amtScrolled >= hFromTop && amtScrolled < hFromTop + hHeight) {
+                            //run function
+                        }
+
+                        //console.log($id);
                 }); 
+                
+                    
+                });
                 
             }
 
