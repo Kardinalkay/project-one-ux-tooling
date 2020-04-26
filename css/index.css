@@ -88,14 +88,21 @@ a:hover, a:focus {
   outline: none;
 }
 nav a {
+  position: relative;
   color: #666;
   text-transform: uppercase;
   font-size: .7em;
   font-family: var(--font-secondary);
 }
 
-nav a:hover {
+nav a:hover, nav a:focus, nav a:active, nav a.active {
   color: var(--yellow) !important;
+}
+
+nav a:active, nav a.active {
+  left: 1px;
+  top: 1px;
+  text-shadow: 1px 0 1px rgba(0,0,0,.3);
 }
 
 /*Lists*/
@@ -383,7 +390,7 @@ aside[role="complementary"] {
 .article-content .text p, .article-content ul {
   line-height: 28px;
   margin-bottom: 14px;
-  font-family: 'Flamenco', cursive;
+  font-family: sans-serif; cursive;
 }
 .article-content .body-component > a {
   text-shadow: 1px 1px 1px #fff;
@@ -402,7 +409,6 @@ aside[role="complementary"] {
 .article-content .body-component a:hover h3, .article-content .body-component:focus h3 {
   text-shadow: 2px 1px 2px rgba(0,0,0,.5) ;
 }
-
 .article-content .body-component > a:after {
   content: "";
   border-left: 10px solid transparent;
@@ -411,7 +417,6 @@ aside[role="complementary"] {
   position: absolute;
   right: 5px;
   top: 15px;
-  z-index: 999;
   transform: rotate(-90deg);
   transition: transform 0.3s;
 }
