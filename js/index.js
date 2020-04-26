@@ -8,6 +8,8 @@
     1d. Select target: If .sub-text, select destination, navigate (up) to the accordion-header and trigger click.
     1e. If .text, then accessing the parent accordion would take a different route
         so account for this and find a way to accordion-header to trigger click on it.
+    1f. Remove active class responsible for styling link, for any new link clicked.
+    1g. Also remove focus on all previously clicked links for any new link clicked to prevent confusion.
 
 2. PROGRESSBAR
     2a. Listen to scroll on the window and compute the amount scrolled as percentage of maximum
@@ -90,10 +92,12 @@
                                             
                         let $activeLinks = document.querySelectorAll('ul.parent-nav li a.active');
                         
+                        // 1f.
+                        
                         if ($activeLinks) {
                             $activeLinks.forEach((link, index) => {
-                                link.classList.remove("active");
-                                link.blur();
+                                link.classList.remove("active");    
+                                link.blur();    //1g.
                             });
                         }
 
