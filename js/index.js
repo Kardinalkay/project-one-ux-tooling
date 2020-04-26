@@ -12,7 +12,8 @@
     1g. Also remove focus on all previously clicked links for any new link clicked to prevent confusion.
     1h. Only trigger click if the tab is closed.
     1i. Otherwise, finally scroll the element into view by scrolling the document its pageOffsetY 
-        + the element's offset top's value
+        + the element's offset top's value.
+    1j. Account for padding-top on body element.
     
 2. PROGRESSBAR
     2a. Listen to scroll on the window and compute the amount scrolled as percentage of maximum
@@ -148,7 +149,7 @@
                         // console.log($scrollIntoView);
                         
                         window.scrollTo({
-                            top: Math.round($scrollIntoView),
+                            top: Math.round($scrollIntoView) - 145, // 1j.
                             left: 0,
                             behaviour: 'smooth'
                         });
