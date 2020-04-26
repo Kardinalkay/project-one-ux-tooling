@@ -9,6 +9,14 @@
     2a. Listen to scroll on the window and compute the amount scrolled as percentage of maximum
         scrollable height in percentage terms.
     2b. Set the value and aria values to progressbar.
+    
+3. SCROLLSPY
+    3a. Loop through every link target ('.article-accordion > li' and .sub-text) and cache. This is 
+        useful becauase the IDs are a bond between the anchor tags <a> and the target. The idea is 
+        to get the IDs of every text or sub-text and tie the connection to the <a> elements. This
+        will be relatively straightforward because the <a> tag already references them with the
+        href attribute.
+    
 
 
 */
@@ -70,14 +78,35 @@
                     let ttlAvailable = documentH - windowH  // How much CAN be scrolled
                     let percent = amtScrolled / ttlAvailable  // What percentage of the scrollable is scrolled : 0.5
                     
-                    let progressWidth = percent * 100;
+                    let progressWidth = Math.round(percent * 100);
                     
                     //2b. 
                     $progress.value = progressWidth;    // set width of progressbar
-                    $progress.setAttribute("aria-valuenow", value); // set aria-width
+                    $progress.setAttribute("aria-valuenow", progressWidth); // set aria-width
+                    
+                    //2c. 
+                    (progressWidth > 80) ? $progress.className = 'scroll-indicator concluding' : $progress.className = 'scroll-indicator';
                     
                 });
             
+            },
+            
+            scrollspy : function () {
+                
+                // 3a.
+                
+                let $text = (opts.scrollspy.text);
+                let $subtext = (opts.scrollspy.subtext);
+                
+                const $targets = document.querySelectorAll($text + ', ' + $subtext);
+                //console.log($targets);
+                
+                $targets.forEach ((element, index) => {    
+                    let $id = element.id;
+                    
+                    //console.log($id);
+                }); 
+                
             }
 
         }
@@ -91,19 +120,24 @@
         },
         progressbar : {
             progress: '.scroll-indicator',
+        },
+        scrollspy : {
+            text: '.article-accordion > li',
+            subtext: '.sub-text'
         }
     }
     
     let article = doArticle(opts);
 
-    try {
+   // try {
         article.accordion();
         article.progressBar();
-    } catch (e) {
+        article.scrollspy();
+ /*   } catch (e) {
         console.warn("You have some error(s):")
         console.log(e.name);
         console.error(e.name);
-    }
+    }*/
 
 
    

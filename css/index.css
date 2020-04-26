@@ -172,7 +172,9 @@ header[role=banner] .fa-search {
 }
 progress::-webkit-progress-bar {
     background-color: var(--blue);
-    background: var(--blue);
+}
+progress.concluding::-webkit-progress-bar {
+  background-color: red;
 }
 progress::-moz-progress-bar { 
   background-color: var(--blue);  
@@ -203,11 +205,17 @@ progress::-webkit-progress-value {
   background: linear-gradient(to right, var(--yellow), var(--blue));
   filter: blur(10px);
 }
+.concluding.scroll-indicator:before, .concluding.scroll-indicator:after {
+  opacity: .8;
+}
 .scroll-indicator:after {
   filter: blur(30px);
 }
 .scroll-indicator {
   animation: progress-glow 5s linear infinite;
+}
+.scroll-indicator.concluding {
+  animation-duration: 4s;
 }
 @keyframes progress-glow {
   0%, 100% {
@@ -252,12 +260,16 @@ main {
 }
 .nav-article {
   grid-column: 1 / span 3;
+  position: fixed;
+  max-width: 25%;
   padding: 20px;
 }
 .parent-nav {
   border-top: 10px solid var(--black);
   padding-top: 20px;
   margin-top: -20px;
+  height: 80vh;
+  overflow: auto;
 }
 .parent-nav > li {
   padding: 5px 0;
@@ -371,8 +383,7 @@ aside[role="complementary"] {
 .article-content .text p, .article-content ul {
   line-height: 28px;
   margin-bottom: 14px;
-  font-weight: 400;
-  font-family: sans-serif;, cursive;
+  font-family: sans-serif; cursive;
 }
 .article-content .body-component > a {
   text-shadow: 1px 1px 1px #fff;
@@ -391,7 +402,6 @@ aside[role="complementary"] {
 .article-content .body-component a:hover h3, .article-content .body-component:focus h3 {
   text-shadow: 2px 1px 2px rgba(0,0,0,.5) ;
 }
-
 .article-content .body-component > a:after {
   content: "";
   border-left: 10px solid transparent;
