@@ -23,6 +23,7 @@
         changes on the scroll event, it must be inside the scroll function.
     3c. For each element that passes the 'in view' test, first 'unstyle' and active link.
         ii. Then find it's corresponding link in the navigation pane and highlight it.
+        iii. And if not in view, make inactive
         
     
 
@@ -104,15 +105,15 @@
                 // 3a.                
                 let $text = (opts.scrollspy.text);
                 let $subtext = (opts.scrollspy.subtext);                
-                let $activeLinks = (opts.scrollspy.links);
-                console.log($activeLinks);
-
                 let windowH = window.innerHeight;
                 
                 const $targets = document.querySelectorAll($text + ', ' + $subtext);
                 //console.log($targets);
                 
                 window.addEventListener('scroll', event =>  {   // listen to scroll on window
+                    
+                    let $activeLinks = document.querySelectorAll('ul.parent-nav li a.active');
+                    console.log($activeLinks);
                     
                     let documentH = document.documentElement.scrollHeight;  // document Height (must always be inside event)
                     
@@ -122,7 +123,7 @@
                     $targets.forEach ((el, index) => { 
                         
                         let $id = el.id;   // cache target IDs for each element
-                        console.log("$id ", $id);
+                        //console.log("$id ", $id);
                         
                         // How tall is the $heading?
                         let hHeight = el.getBoundingClientRect().height
@@ -170,7 +171,6 @@
         scrollspy : {
             text: '.article-accordion > li',
             subtext: '.sub-text',
-            activeLinks: document.querySelectorAll('ul.parent-nav li a.active')
         }
     }
     
