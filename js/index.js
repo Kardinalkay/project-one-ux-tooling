@@ -5,8 +5,9 @@
     1a. Listen for click on accordion-header and slide corresponding text down / up.
     1b. When panel is visible, give user indication with the caret symbol by adding a class.
     1c. When navigation link is clicked, save its href value, prevent default action.
-    1d. Select target, and if .sub-text, select parent accordion tab and trigger click.
-    1e. If .text, then skip selection of parent accordion and trigger click on this very target.
+    1d. Select target: If .sub-text, select destination, navigate (up) to the accordion-header and trigger click.
+    1e. If .text, then accessing the parent accordion would take a different route
+        so account for this and find a way to accordion-header to trigger click on it.
 
 2. PROGRESSBAR
     2a. Listen to scroll on the window and compute the amount scrolled as percentage of maximum
@@ -76,26 +77,54 @@
                 // 1c.
                 
                 let $activeLink = document.querySelectorAll('ul.parent-nav li a');  // Select nav links
-                                                        
+
                 for (let i = 0; i < $activeLink.length; i++) {
                     
-                    $activeLink[i].addEventListener('click', function () {  // Listen to click on navigation menu link                        
+                    $activeLink[i].addEventListener('click', function () {  // Listen to click on navigation menu link 
+                        
                         event.preventDefault();
                         
+                        let el = ($activeLink[i]);
+                        
+                        let $id = el.id;   // cache target IDs for each element
+                                            
+                        let $activeLinks = document.querySelectorAll('ul.parent-nav li a.active');
+                        
+                        if ($activeLinks) {
+                            $activeLinks.forEach((link, index) => {
+                                link.classList.remove("active");
+                                link.blur();
+                            });
+                        }
+
+                        
+                        let $activeLinkNew = document.querySelector('ul.parent-nav li a[href="#' + $id + '"]');
+                        $activeLinkNew.classList.add("active");
+                                                
                         let href = this.href.split("#")[1]; // get the hash part of the href
                         href = '#' + href; // add octothorpe back
-                        console.log(href);
-                        
+                        // console.log(href);  // #understand-competition
+                                                
                         // 1d. 
-                        let $target = document.querySelector(href);
-                        let $accTab = $target.parentNode.parentNode.parentNode;
-                        console.log($target);
-                        console.log($accTab);
+                        let $target = document.querySelector(href); // 
+                        let $accTab = '';
                         
-                        // 1e.
-                        $accTab.click();   // trigger click on parent
+                        // 1e. If it was a sub-link that was clicked, then go to its destination and travel up the 
+                        // DOM tree to find the accordion head, and trigger-click. 
                         
+                        // But if it was parent link that was clicked, no need to climb the DOM because it links 
+                        if ($activeLink[i].parentNode.parentNode.classList.contains('parent-nav')) {   // test if parent link
+                            $accTab = $target.children[0].children[0];
+                            console.log($accTab);
+                                                    
+                        } else {
+                            $accTab = $target.parentNode.parentNode.previousElementSibling;
+                            //console.log($target);   // li#understand-competition
+                            //console.log($accTab);   // <a href="#understand-competition"></a>   
+                        }
                         
+                        $accTab.click();   // trigger click on accordion tab
+
                     });
                 }
 
@@ -169,6 +198,7 @@
                             if ($activeLinks) {
                                 $activeLinks.forEach ((link, index) => {
                                     link.classList.remove("active");
+                                    link.blur();
                                 });
                             }
 
