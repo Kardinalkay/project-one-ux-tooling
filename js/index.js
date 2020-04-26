@@ -101,6 +101,7 @@
                 // 3a.                
                 let $text = (opts.scrollspy.text);
                 let $subtext = (opts.scrollspy.subtext);
+                let windowH = window.innerHeight
                 
                 const $targets = document.querySelectorAll($text + ', ' + $subtext);
                 //console.log($targets);
@@ -125,7 +126,9 @@
                         // 3b.
 
                         if (amtScrolled >= hFromTop && amtScrolled < hFromTop + hHeight) {
-                            //run function
+                            if ($id==='understand-design-problem') {
+                                alert ('IN VIEW');
+                            }
                         }
 
                         //console.log($id);
