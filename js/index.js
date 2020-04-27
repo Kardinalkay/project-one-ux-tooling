@@ -2,9 +2,19 @@
 
 1. ACCORDION
 
-    1a. Listen for click on accordion-header and slide corresponding text down / up
-    1b. When panel is visible, give user indication with the caret symbol by adding a class
-
+    1a. Listen for click on accordion-header and slide corresponding text down / up.
+    1b. When panel is visible, give user indication with the caret symbol by adding a class.
+    1c. When navigation link is clicked, save its href value, prevent default action.
+    1d. Select target: If .sub-text, select destination, navigate (up) to the accordion-header and trigger click.
+    1e. If .text, then accessing the parent accordion would take a different route
+        so account for this and find a way to accordion-header to trigger click on it.
+    1f. Remove active class responsible for styling link, for any new link clicked.
+    1g. Also remove focus on all previously clicked links for any new link clicked to prevent confusion.
+    1h. Only trigger click if the tab is closed.
+    1i. Otherwise, finally scroll the element into view by scrolling the document its pageOffsetY 
+        + the element's offset top's value.
+    1j. Account for padding-top on body element.
+    
 2. PROGRESSBAR
     2a. Listen to scroll on the window and compute the amount scrolled as percentage of maximum
         scrollable height in percentage terms.
@@ -27,7 +37,7 @@
           changes on the scroll event, it must be inside the scroll function.
       3c. For each element that passes the 'in view' test, first 'unstyle' any active link.
           ii. Then find it's corresponding link in the navigation pane and highlight it.
-      3d. Ensure that only 1 link is styled at a time by halting the loop once a target is in view
+      3d. Ensure that only 1 link is styled at a time by halting the loop once a target is in view.
 
 */
 
@@ -68,6 +78,83 @@
 
                     }   
                     
+                };
+                
+                // 1c.
+                
+                let $activeLink = document.querySelectorAll('ul.parent-nav li a');  // Select nav links
+
+                for (let i = 0; i < $activeLink.length; i++) {
+                    
+                    $activeLink[i].addEventListener('click', function() {
+                        let el = this;
+                        activatePanel(el);
+                    });
+                                                    
+                    function activatePanel (el, defaultBehaviour=false) {  // Listen to click on navigation menu link 
+                        
+                        event.preventDefault();
+                        
+                        let href = el.href.split("#")[1]; // get the hash part of the href
+                        href = '#' + href; // add octothorpe back
+                        // console.log(href);  // #understand-competition
+                          
+                        let $activeLinks = document.querySelectorAll('ul.parent-nav li a.active');
+                        
+                        // 1f.
+                        
+                        if ($activeLinks) {
+                            $activeLinks.forEach((link, index) => {
+                                link.classList.remove("active");    
+                                link.blur();    //1g.
+                            });
+                        }
+
+                        
+                        let $activeLinkNew = document.querySelector('ul.parent-nav li a[href="' + href + '"]');
+                        $activeLinkNew.classList.add("active");
+                        
+                        // 1d. 
+                        let $target = document.querySelector(href);  
+                        let $accTab = '';
+                        
+                        //1h.
+                        let $panelOpen = false;
+                        let $bodyComponent = '';
+                        
+                        // 1e. If it was a sub-link that was clicked, then go to its destination and travel up the 
+                        // DOM tree to find the accordion head, and trigger-click. 
+                        
+                        // But if it was parent link that was clicked, no need to climb the DOM because it links 
+                        if ($activeLink[i].parentNode.parentNode.classList.contains('parent-nav')) {   // test if parent link
+                            $accTab = $target.children[0].children[0];
+                            //console.log($bodyComponent);
+                            // console.log($accTab);
+                                                    
+                        } else {
+                            $accTab = $target.parentNode.parentNode.previousElementSibling;
+                            //console.log($target);   // li#understand-competition
+                            //console.log($accTab);   // <a href="#understand-competition"></a>   
+                        }
+                        
+                        // Only if the panel is closed should a click be triggered to open it                         
+                        $bodyComponent = ($accTab.parentElement).classList.contains('close');
+                        if ($bodyComponent) {
+                            $accTab.click();   // trigger click on accordion tab   
+                        }
+                        
+                        // 1i. 
+                        //element in view would be its offset to window top + windows offset to document top
+                        $scrollIntoView = $target.getBoundingClientRect().top + window.scrollY;
+                        // console.log($scrollIntoView);
+                        
+                        window.scrollTo({
+                            top: Math.round($scrollIntoView) - 145, // 1j.
+                            left: 0,
+                            behaviour: 'smooth'
+                        });
+                                                
+                    };
                 }
 
             },
@@ -122,8 +209,6 @@
                         
                         let el = ($targets[i]);
                         
-                        console.log($targets[i]);
-                        
                         let $id = el.id;   // cache target IDs for each element
                         
                         // How tall is the $heading?
@@ -142,10 +227,10 @@
                             if ($activeLinks) {
                                 $activeLinks.forEach ((link, index) => {
                                     link.classList.remove("active");
+                                    link.blur();
                                 });
                             }
 
-                            
                             // 3cii.
                             let $activeLinkNew = document.querySelector('ul.parent-nav li a[href="#' + $id + '"]');
                             $activeLinkNew.classList.add("active");
@@ -169,7 +254,8 @@
     const opts = {
         accordion : {
             heading: '.body-component > a',
-            body: '.body-component'
+            body: '.body-component',
+            navlink: ''
         },
         progressbar : {
             progress: '.scroll-indicator'
