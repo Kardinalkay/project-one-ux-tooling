@@ -379,33 +379,38 @@
                     let amtScrolled = Math.round(window.scrollY);    // amtScrolled
                     
                     let btn = document.querySelector(opts.scrollToEnd.btn);
+                    console.log(btn);
                     
                     // 6a. (1.5 times the viewport's height from the document top and not yet at end of document)
                     if (amtScrolled > (1.5 * windowH) && (amtScrolled < (ttlAvailable - windowH))) {
-                        alert ('o yea');
                         // Avoid styling twice
                         !(btn.classList.contains("is-visible")) ? btn.classList += " is-visible" : btn.classList += '';
-                        !(btn.classList.contains("up")) ? btn.classList -= " up" : btn.classList += '';
+                        //!(btn.classList.contains("up")) ? btn.classList += " up" : btn.classList += '';
+                        
+                        // Listen for click to send page down
+                        btn.addEventListener('click', () => {
+                            scroll('down');
+                        });
                                                 
                     } else if (amtScrolled > (ttlAvailable - windowH) && amtScrolled < (ttlAvailable) ) {    // 6b.
                         // rotate button and prime for scrolling down 
-                        alert ('o no');
                         !(btn.classList.contains("is-visible")) ? btn.classList += " is-visible" : btn.classList += '';
-                        !(btn.classList.contains("up")) ? btn.classList -= " up" : btn.classList += '';
+                        //!(btn.classList.contains("up")) ? btn.classList -= " up" : btn.classList -= '';
+                        scroll('up');
+                    }
+                    
+                    scroll = (dir) => {    // 
+                        if (dir==='up') {
+
+                        } else {
+                             document.documentElement.scrollTop = ttlAvailable; 
+                        }
                     }
                 
                 });
                 
                 // 6b. 
-                
-                scroll = (dir) => {    // 
-                    if (dir==='up') {
-                        
-                    } else {
-                        
-                    }
-                }
-                
+            
             }
 
         }
