@@ -62,7 +62,10 @@
   7a. Listen to input on slider and fetch it's value.
   7b. Express %value of slider as literal approximate pixel value of scrollable height.
   7c. Scroll window to approximate pageYOffset pixel.
-  
+  7d. On window scroll, the right gauge on the slider has to be set. To do this, 
+      the window listens to the scroll event then computes it's current displacement to the top as 
+      percentage of its total scrollable height. Then this value is used to update the value of 
+      the custom slider.
   
 */
 
@@ -421,8 +424,6 @@
                 let windowH = window.innerHeight;  
                 let documentH = document.documentElement.scrollHeight;  // document Height (must always be inside event)
                 let ttlAvailable = documentH - windowH;  // How much CAN be scrolled
-
-                let amtScrolled = Math.round(window.scrollY);    // amtScrolled
                 
                 /*The idea is to fetch the value of the slider when dragged. The current value of the slider
                 will be expressed as a percentage. Then this percentage will serve as the same percentage of
@@ -438,12 +439,31 @@
                     // 7b. Express %value of slider as literal approximate pixel value of scrollable height
                     ttlAvailablePxl = ($sliderPcntVal * ttlAvailable).toFixed(2);
                     
+                    if (isNaN(ttlAvailablePxl) || (ttlAvailablePxl === 'undefined')) {
+                        throw Error(`${ttlAvailable} should be a number`);
+                    } 
+                    
                     // 7c. Send window to approximate pixel vertical distance
                     scrollPixel (ttlAvailablePxl);
                     
                     console.log(sliderVal);
                     
                 };
+                
+                window.addEventListener('scroll', () => {
+                    
+                    // Redeclare variables in case user resizes his window: these values will change
+                    // and this event will not keep using the old values from up top in the method.
+                    
+                    let amtScrolled = Math.round(window.scrollY);    // amtScrolled
+                    let windowH = window.innerHeight;  
+                    let documentH = document.documentElement.scrollHeight; 
+                    let ttlAvailable = documentH - windowH;  
+                    
+                    let amtScrolledPcnt = ((amtScrolled / ttlAvailable).toFixed(2) * 100);
+                    $slider.value = Math.round(amtScrolledPcnt);
+                    
+                });
                 
                 scrollPixel = (px) => {
                     
