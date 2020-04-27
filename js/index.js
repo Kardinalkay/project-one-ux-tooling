@@ -42,6 +42,7 @@
 4.  WORDCOUNT
   4a. Cache approximate words per minute for steady reader and fast reader.
   4b. Fetch all text from article.
+  4c. Trim whitespace (important).
     
 */
 
@@ -267,7 +268,7 @@
                     textPieces += $text.textContent;    // concatenate
                 });   
                 
-                let wordLength = (textPieces.length);
+                let wordLength = (textPieces.trim().length);
                 console.log(wordLength);
                                 
                 
