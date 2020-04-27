@@ -57,7 +57,15 @@
         About one and a half times the height of the viewport from the top of document seems apt)
   6b. Button should be visible but should scroll down if close to document top.
   6c. Button should scroll up if viewport is at the base of document.
-  
+   
+7. CUSTOM PAGE SLIDER
+  7a. Listen to input on slider and fetch it's value.
+  7b. Express %value of slider as literal approximate pixel value of scrollable height.
+  7c. Scroll window to approximate pageYOffset pixel.
+  7d. On window scroll, the right gauge on the slider has to be set. To do this, 
+      the window listens to the scroll event then computes it's current displacement to the top as 
+      percentage of its total scrollable height. Then this value is used to update the value of 
+      the custom slider.
   
 */
 
@@ -202,7 +210,6 @@
                     (progressWidth > 80) ? $progress.className = 'scroll-indicator concluding' : $progress.className = 'scroll-indicator';
                     
                 });
-            
             },
             
             scrollspy : function () {
@@ -254,14 +261,9 @@
                             
                             // 3d.
                             break;
-                           
                         }
-                       
                     }; 
-                
-                    
                 });
-                
             },
             
             wordcount : function () {
@@ -379,7 +381,7 @@
                     let amtScrolled = Math.round(window.scrollY);    // amtScrolled
                     
                     let btn = document.querySelector(opts.scrollToEnd.btn);
-                    console.log(btn);
+                    //console.log(btn);
                     
                     // 6a. (1.5 times the viewport's height from the document top and not yet at end of document)
                     if (amtScrolled > (1.5 * windowH) && (amtScrolled < (ttlAvailable - windowH))) {
@@ -413,10 +415,67 @@
                 
                 // 6b. 
             
+            },
+            
+            pageSlider : function () {
+                
+                const $slider = document.getElementById(opts.pageSlider.slider);
+
+                let windowH = window.innerHeight;  
+                let documentH = document.documentElement.scrollHeight;  // document Height (must always be inside event)
+                let ttlAvailable = documentH - windowH;  // How much CAN be scrolled
+                
+                /*The idea is to fetch the value of the slider when dragged. The current value of the slider
+                will be expressed as a percentage. Then this percentage will serve as the same percentage of
+                the page's scrollable Height. Then with native methods like scollTo(), or scrollIntoVieew(),
+                the page will be scrolled to the exact corresponding point by using that percentage to evaluate
+                the window approximate pixel y-position.*/
+                
+                $slider.oninput = () => {
+                                        
+                    let sliderVal = $slider.value;                    
+                    $sliderPcntVal = (sliderVal / 100);   // express value in % terms
+                    
+                    // 7b. Express %value of slider as literal approximate pixel value of scrollable height
+                    ttlAvailablePxl = ($sliderPcntVal * ttlAvailable).toFixed(2);
+                    
+                    if (isNaN(ttlAvailablePxl) || (ttlAvailablePxl === 'undefined')) {
+                        throw Error(`${ttlAvailable} should be a number`);
+                    } 
+                    
+                    // 7c. Send window to approximate pixel vertical distance
+                    scrollPixel (ttlAvailablePxl);
+                    
+                    console.log(sliderVal);
+                    
+                };
+                
+                window.addEventListener('scroll', () => {
+                    
+                    // Redeclare variables in case user resizes his window: these values will change
+                    // and this event will not keep using the old values from up top in the method.
+                    
+                    let amtScrolled = Math.round(window.scrollY);    // amtScrolled
+                    let windowH = window.innerHeight;  
+                    let documentH = document.documentElement.scrollHeight; 
+                    let ttlAvailable = documentH - windowH;  
+                    
+                    let amtScrolledPcnt = ((amtScrolled / ttlAvailable).toFixed(2) * 100);
+                    $slider.value = Math.round(amtScrolledPcnt);
+                    
+                });
+                
+                scrollPixel = (px) => {
+                    
+                   window.scrollTo({
+                        top: Math.round(px),
+                        left: 0,
+                        behavior: 'smooth'
+                    });
+                }
+                
             }
-
         }
-
     }
     
     const opts = {
@@ -443,24 +502,28 @@
         },
         scrollToEnd : {
             btn: '.scrollToEndBtn'
+        },
+        pageSlider : {
+            slider: 'article-scroller'
         }
     }
     
     let article = doArticle(opts);
 
-    try {
+   /* try {*/
         article.accordion();
         article.progressBar();
         article.scrollspy();
         article.wordcount();
         article.fixedHeading();
         article.scrolltoEnd();
-    } catch (e) {
+        article.pageSlider();
+    /*} catch (e) {
         console.warn("You have some error(s):")
         console.log(e.name);
         console.error(e.name);
     }
-
+*/
 
    
     
