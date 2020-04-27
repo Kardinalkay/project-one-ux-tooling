@@ -43,6 +43,7 @@
   4a. Cache approximate words per minute for steady reader and fast reader.
   4b. Fetch all text from article.
   4c. Trim whitespace (important).
+  4d. Remove whitespace as a result of HTML.
     
 */
 
@@ -268,8 +269,20 @@
                     textPieces += $text.textContent;    // concatenate
                 });   
                 
-                let wordLength = (textPieces.trim().length);
-                console.log(wordLength);
+                // "a b c" => [a, b, c]
+                let words = (textPieces.trim().split(" "));
+                words = words.filter(Boolean); // Eliminate whitespace brought about by HTML markup
+                console.log(words);
+                
+                
+                /*let steadyTime = Math.round(wordLength / steady);
+                let fastTime = Math.round(wordLength / fast);
+                */
+                //console.log(fastTime);
+                
+                if (isNaN(steadyTime) || isNaN(fastTime)) {
+                    throw Error ('WORD COUNT NOT RETURNING NUMBERS');
+                }
                                 
                 
             }
