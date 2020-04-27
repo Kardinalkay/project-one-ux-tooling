@@ -44,6 +44,8 @@
   4b. Fetch all text from article.
   4c. Trim whitespace (important).
   4d. Remove whitespace as a result of HTML.
+  4e. Compute time by dividing total words by approximate reading time / min.
+  4f. Place the values in the document.
     
 */
 
@@ -269,20 +271,33 @@
                     textPieces += $text.textContent;    // concatenate
                 });   
                 
-                // "a b c" => [a, b, c]
+                // 4c. "a b c" => [a, b, c]
                 let words = (textPieces.trim().split(" "));
+                
+                // 4d.
                 words = words.filter(Boolean); // Eliminate whitespace brought about by HTML markup
-                console.log(words);
+                wordLength = words.length;
                 
-                
-                /*let steadyTime = Math.round(wordLength / steady);
+                // 4e. Compute average time
+                let steadyTime = Math.round(wordLength / steady);
                 let fastTime = Math.round(wordLength / fast);
-                */
-                //console.log(fastTime);
-                
+                                
                 if (isNaN(steadyTime) || isNaN(fastTime)) {
                     throw Error ('WORD COUNT NOT RETURNING NUMBERS');
                 }
+                
+                // 4f. Place values in HTML
+                
+                let steadyID = opts.wordcount.steadyElm;
+                let fastID = opts.wordcount.fastElm;
+                
+                let steadyElm = document.querySelector(`span${steadyID}`);
+                let fastElm = document.querySelector(`span${fastID}`);
+                
+                steadyElm.innerText = steadyTime + 'minutes';
+                fastElm.innerText = fastTime + 'minutes';
+
+                
                                 
                 
             }
@@ -306,7 +321,9 @@
         },
         wordcount : {
             steady: 200,
-            fast: 250
+            fast: 250,
+            steadyElm: '#steady-reader',
+            fastElm: '#fast-reader'
         }
     }
     

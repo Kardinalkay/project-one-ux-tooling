@@ -241,6 +241,24 @@ progress::-webkit-progress-value {
   height: 100%;
   font-size: 0;
 }
+.reading-time {
+    border: 1px outset var(--blue);
+    display: inline-block;
+    opacity: .8;
+    padding: .2em 1em;
+    font-size: .9em;
+    background: rgba(222,180,6,.1)
+}
+.reading-time p {
+  color: var(--blue);
+  text-transform: uppercase;
+  font-family: var(--font-tertiary);
+}
+.reading-time p span {
+  font-weight: bolder;
+  font-kerning: auto;
+  color: var(--blue);
+}
 .scroll-container {
     position: absolute;
     right: 1em;
