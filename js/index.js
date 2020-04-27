@@ -40,10 +40,8 @@
   3d. Ensure that only 1 link is styled at a time by halting the loop once a target is in view.
     
 4.  WORDCOUNT
-  4a. 
+  4a. Cache approximate words per minute for steady reader and fast reader.
     
-  
-
 */
 
 
@@ -250,6 +248,14 @@
                     
                 });
                 
+            },
+            
+            wordcount : function () {
+                
+                const steady = (opts.wordcount.steady);
+                const fast = (opts.wordcount.fast);
+                
+                
             }
 
         }
@@ -268,6 +274,10 @@
         scrollspy : {
             text: '.article-accordion > li',
             subtext: '.sub-text',
+        },
+        wordcount : {
+            steady: 200,
+            fast: 250
         }
     }
     
