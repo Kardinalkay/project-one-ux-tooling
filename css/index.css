@@ -272,6 +272,22 @@ progress::-webkit-progress-value {
   opacity: .4;
   transform: rotate(-45deg);
 }
+.heading-temporary{
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  top: 20px;
+  overflow: hidden;
+  height: 50px;
+}
+.heading-temporary span {
+  display: block;
+  position: relative;
+  top: -100%;
+  height: inherit;
+  border: 2px solid black;
+  background: var(--blue);
+}
 #result {
   position: absolute;
   right: 15em;
