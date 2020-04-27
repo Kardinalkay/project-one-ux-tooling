@@ -49,7 +49,8 @@
   
 5. FIXED HEADING ON SCROLL
   5a. Check if heading is in view 
-    
+  5b. Reference the heading and showbox and insert heading inside showbox
+  5c. Display new heading when user scrolls into view
 */
 
 
@@ -162,7 +163,7 @@
                         window.scrollTo({
                             top: Math.round($scrollIntoView) - 145, // 1j.
                             left: 0,
-                            behaviour: 'smooth'
+                            behavior: 'smooth'
                         });
                                                 
                     };
@@ -313,20 +314,37 @@
                     
                     for (let i = 0; i < $headings.length; i++) {
                         
-                        let el = ($headings[i]);
+                        let $el = ($headings[i]);
                         
-                        let id = el.id;
+                        let id = $el.id;
+                        console.log($el);
                                             
-                        let hFromTop = Math.round(el.getBoundingClientRect().top);
+                        let hFromTop = Math.round($el.getBoundingClientRect().top);
                         
                         // Check if heading is in view 
                         
-                        if (hFromTop > 125 && hFromTop < 145) { 
-
-                            let headingTitle = $target.children[0].children[0];
+                        if (hFromTop > 125 && hFromTop < 165) { // title in view?
                             
+                            let headingTitle = '';  
+                            // Cater for inconsistency in DOM in order to fetch necessary title
+                            if ($el.classList.contains('sub-text')) {//reference heading title
+                                headingTitle = $el.children[0].textContent;
 
-                            break;
+                            } else {
+                                headingTitle = ($el.children[0].children[0].children[0]).textContent;
+                            }
+
+                            //console.log(headingTitle);
+                            //reference showbox
+                            const $temporaryHeader = document.querySelector(opts.fixedHeading.header);
+                            
+                            $temporaryHeader.innerText = headingTitle;
+                            // 5c. Display new heading when user scrolls into view
+                            if (!$temporaryHeader.parentElement.classList.contains("slide")) {  // Ensure not to apply the class twice
+                                $temporaryHeader.parentElement.classList += " slide"; 
+                            }
+                                                        
+                           // break;
                            
                         } else if (hFromTop > 145) {
                             
@@ -364,7 +382,7 @@
             fastElm: '#fast-reader'
         },
         fixedHeading : {
-            
+            header: '.heading-temporary > span:first-of-type'            
         }
     }
     

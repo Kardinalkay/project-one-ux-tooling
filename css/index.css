@@ -287,7 +287,14 @@ progress::-webkit-progress-value {
   height: inherit;
   border: 2px solid black;
   background: var(--blue);
+  transition: all 1s;
+  color: white;
+  font-size: 2.2em;
+  text-align: center;
 }
+.heading-temporary.slide span {
+  top: 0;
+} 
 #result {
   position: absolute;
   right: 15em;
