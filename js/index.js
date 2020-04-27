@@ -154,8 +154,8 @@
                         // But if it was parent link that was clicked, no need to climb the DOM because it links 
                         if ($activeLink[i].parentNode.parentNode.classList.contains('parent-nav')) {   // test if parent link
                             $accTab = $target.children[0].children[0];
-                            //console.log($bodyComponent);
-                            // console.log($accTab);
+                            console.log($bodyComponent);
+                            console.log($accTab);
                                                     
                         } else {
                             $accTab = $target.parentNode.parentNode.previousElementSibling;
@@ -164,8 +164,8 @@
                         }
                         
                         // Only if the panel is closed should a click be triggered to open it                         
-                        $bodyComponent = ($accTab.parentElement).classList.contains('close');
-                        if ($bodyComponent) {
+                        $bodyComponent = ($accTab.parentElement).classList.contains('open');
+                        if (!$bodyComponent) {
                             $accTab.click();   // trigger click on accordion tab   
                         }
                         
