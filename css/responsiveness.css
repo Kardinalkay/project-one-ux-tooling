@@ -1,0 +1,142 @@
+
+@media (min-width: 479px) {
+	.reading-time {
+		display: inline-block;
+		position: absolute;
+		right: 3px;	/*account for border*/
+		top: 67px;
+	}
+	.heading-temporary {
+	  position: absolute;
+	  width: 100%;
+	  left: 0;
+	  right: 0;
+	  top: 16px;
+	  left: auto;
+	  overflow: hidden;
+	  height: 50px;
+	  line-height: 45px;
+	}
+}
+
+@media (min-width: 767px) {
+	main {
+		width: calc(100% - (50px * 2));
+	}
+	.page-title {
+		font-size: 1.6em;
+	}
+	.scroll-widget-container {
+	  padding-bottom: 0;
+	}
+	.scroll-indicator, .progress {
+	  width: 50%;
+	}
+	.scroll-indicator {
+	  animation: progress-glow 5s linear infinite;
+	  transition: all 1s;
+	  transform-origin: left center;
+	}
+	.reading-time {
+	    font-size: .8em;
+	    display: inline-block;
+	    position: static;
+	    right: auto;
+	    top: 0;
+	}
+	.heading-temporary {
+		left: auto;
+		width: 70%;
+		right: -2em;
+	}
+	.heading-temporary span {
+		font-size: 1.1em;
+		color: transparent;
+		/top: 18px;
+		text-shadow: 0 0 2px #eaf8ff;
+	}
+	.scroll-widget .trans-logo{
+		transform: rotate(-45deg) scale(1);
+	}
+	.content-header .meta-list {
+		margin-bottom: 2.0em;
+	}
+	.content-header h2, .sidebar-primary-heading {
+		font-size: 28px;
+	}
+
+	.nav-article {
+		grid-column: 1 / span 4;
+		max-width: 25%;	
+		display: block;
+	}
+	.parent-nav {
+	  border-top: 10px solid var(--black);
+	  padding-top: 20px;
+	  margin-top: -20px;
+	  height: 80vh;
+	  overflow: auto;
+	}
+	.article-content{
+	  grid-column: 5 / span 12;
+	  position: relative;
+	  padding: 0 20px;
+	}
+	aside[role="complementary"] { 
+		grid-column: 1 / -1;
+		padding: 0;
+		z-index: 0;
+	}
+
+
+
+
+	footer[role="contentinfo"] {
+		position: relative;
+		z-index: 1;
+	}
+
+}
+
+@media (min-width: 1170px) {
+	.page-title {
+		font-size: 1.8em;
+	}
+	.heading-temporary{
+	  left: 25%;
+	  width: 50%;
+	  right: auto;
+	  top: 19px;
+	}
+	.reading-time {
+	    font-size: .9em;
+	}
+	.heading-temporary span {
+		font-size: 1.4em;
+	}
+	.scroll-container {
+		display: block;
+	}
+	.content-header h2, .sidebar-primary-heading {
+		font-size: 36px;
+	}
+	.content-header .meta-list {
+		margin-bottom: 2.5em;
+	}
+	.article-accordion {
+	  font-size: 1.0em;
+	}
+
+
+	.nav-article {
+		grid-column: 1 / span 3;
+	}
+	.article-content{
+	  grid-column: 4 / span 6;
+	}
+	aside[role="complementary"] { 
+		grid-column: 10 / span 3;
+		background: rgba(0,0,0,0);
+	}
+
+}

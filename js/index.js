@@ -461,7 +461,6 @@
                     let ttlAvailable = documentH - windowH;  
                     
                     let amtScrolledPcnt = ((amtScrolled / ttlAvailable).toFixed(2) * 100);
-                    $slider.value = Math.round(amtScrolledPcnt);
                     
                 });
                 

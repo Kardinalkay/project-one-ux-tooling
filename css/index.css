@@ -94,11 +94,9 @@ nav a {
   font-size: .7em;
   font-family: var(--font-secondary);
 }
-
 nav a:hover, nav a:focus, nav a.active {
-  color: var(--yellow) !important;
+  color: rgba(222, 180, 6, .5) !important;
 }
-
 nav a:active, nav a.active {
   left: 1px;
   top: 1px;
@@ -160,7 +158,7 @@ header[role=banner] .fa-search {
 .page-title {
   width: 80%;
   margin: auto;
-  font-size: 1.8em;
+  font-size: 1.2em;
   text-align: center;
   color: var(--black);
 }
@@ -168,7 +166,7 @@ header[role=banner] .fa-search {
   position: fixed;
   top: 63px;
   width: 100%;
-  padding: 1em 0;
+  padding: 1em 0 3em;
   z-index: 1;
   margin-top: -2px;
   background: var(--grey);
@@ -194,7 +192,7 @@ progress::-webkit-progress-value {
   background-color: var(--yellow);
 }
 .scroll-indicator, .progress {
-  width: 50%;
+  width: 100%;
   height: 4px;
   padding: 0;
   border: 0;
@@ -225,7 +223,7 @@ progress::-webkit-progress-value {
 .scroll-indicator {
   animation: progress-glow 5s linear infinite;
   transition: all 1s;
-    transform-origin: left center;
+  transform-origin: center;
 }
 .scroll-indicator.concluding {
   animation-duration: 4s;
@@ -242,12 +240,13 @@ progress::-webkit-progress-value {
 /*reading time*/
 
 .reading-time {
-    border: 1px outset rgba(0,0,51,.1);
-    display: inline-block;
-    opacity: .8;
-    padding: .2em 1em;
-    font-size: .9em;
-    background: rgba(222,180,6,.1)
+  display: none;
+  border: 1px outset rgba(0,0,51,.1);
+  display: inline-block;
+  opacity: .8;
+  padding: .2em 1em;
+  font-size: .7em;
+  background: rgba(222,180,6,.1);
 }
 .reading-time p {
   color: var(--blue);
@@ -264,6 +263,7 @@ progress::-webkit-progress-value {
 /*slider*/
 
 .scroll-container {
+    display: none;
     position: absolute;
     right: 1em;
     top: 2em;
@@ -289,7 +289,6 @@ progress::-webkit-progress-value {
   cursor: pointer;
   box-shadow: 1px 2px 1px rgba(0,0,0,.3);
 }
-
 .slider::-moz-range-thumb {
   width: 25px;
   height: 25px;
@@ -302,32 +301,35 @@ progress::-webkit-progress-value {
   right: -1em;
   top: -5em;
   opacity: .4;
-  transform: rotate(-45deg);
+  transform: rotate(-45deg) scale(0.8);
 }
 .heading-temporary{
   position: absolute;
-  width: 50%;
-  left: 25%;
-  top: 20px;
+  width: 100%;
+  right: 0;
+  top: 16px;
+  left: 0;
   overflow: hidden;
   height: 50px;
+  line-height: 45px;
 }
 .heading-temporary span {
   display: block;
   position: relative;
   top: -100%;
   height: inherit;
-  border: 2px solid black;
-  background: var(--blue);
+  line-height: inherit;
+  border: 2px solid white;
+  background-color: rgba(0, 0, 51, 0.9);
   transition: all 1s;
   color: white;
   font-family: var(--font-tertiary), sans-serif;
   text-transform: uppercase;
-  font-weight: lighter;
-  font-size: 1.6em;
+  font-weight: bold;
+  font-size: 1em;
   opacity: 1;
-  color: transparent;
-  text-shadow: 0 0 2px #eaf8ff;
+  color: white;
+  text-shadow: none;
   text-align: center;
   text-overflow: ellipsis;
 }
@@ -345,18 +347,20 @@ main, .scroll-widget {
   margin: 0 auto;
 }
 main {
-  grid-column: 1/-1;
   display: grid;
+  width: auto;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: min-content 1fr;
   position: relative;
-  padding: 2em 0;
+  padding: 2em 0 0;
   background: rgba(255,255,255,.8);
 }
 .nav-article {
-  grid-column: 1 / span 3;
+  /grid-column: 1 / span 3;
+  grid-column: 1 / -1;
   position: fixed;
-  max-width: 25%;
+  display: none;
+  /max-width: 25%;
   padding: 20px;
   background: rgba(255,255,255,.9);
 }
@@ -384,12 +388,17 @@ main {
   content: " - "
 }
 .article-content{
-  grid-column: 4 / span 6;
+  grid-column: 1 / -1;
   position: relative;
   padding: 0 20px;
 }
 aside[role="complementary"] {
-  grid-column: 10 / span 3;
+  /grid-column: 10 / span 3;
+  grid-column: 1 / -1;
+  position: relative;
+  padding: 20px 40px;
+  z-index: 1;
+  background: rgb(255,255,255);
 }
 
 /*article*/
@@ -399,7 +408,7 @@ aside[role="complementary"] {
 }
 .content-header .meta-list {
   display: inline-block;
-  margin-bottom: 2.5em;
+  margin-bottom: 0.5em;
   font-family: var(--font-secondary);
 }
 .meta-list li {
@@ -452,6 +461,7 @@ aside[role="complementary"] {
 }
 .article-accordion {
   margin-top: 2em;
+  font-size: .9em;
 }
 .article-content .text {
   display: none;
@@ -476,10 +486,21 @@ aside[role="complementary"] {
   transition: transform 0.2s ease;
   box-sizing: border-box;
 }
+.article-accordion ul:not(.classification){
+  list-style: disc;
+  text-indent: .2in;
+  font-size: .9em;
+}
 .article-content .text p, .article-content ul {
   line-height: 28px;
   margin-bottom: 14px;
-  font-family: sans-serif; cursive;
+  font-family: sans-serif, cursive;
+}
+.sub-text h3 {
+  text-align-last: center;
+  border-bottom: 1px outset rgba(0,0,51,.1);
+  margin-bottom: 1em;
+  font-family: Oswald;
 }
 .article-content .body-component > a {
   text-shadow: 1px 1px 1px #fff;
@@ -492,10 +513,10 @@ aside[role="complementary"] {
   font-family: 'Space Mono';
   background-color: var(--mid-grey);
 }
-.article-content .body-component a:hover, .article-content .body-component:focus {
+.article-content .body-component a:hover, .article-content .body-component a:focus {
   color: var(--blue);
 }
-.article-content .body-component a:hover h3, .article-content .body-component:focus h3 {
+.article-content .body-component a:hover h3, .article-content .body-component a:focus h3 {
   text-shadow: 2px 1px 2px rgba(0,0,0,.5) ;
 }
 .article-content .body-component > a:after {
@@ -523,6 +544,10 @@ aside[role="complementary"] {
   display: block;
   border-top: 1px solid #efefef;
 }
+.post-listing-item:hover {
+  outline: thin solid black;
+}
+
 .post-list-link {
   display: flex;
   flex-flow: row nowrap;
@@ -575,12 +600,16 @@ footer[role="contentinfo"] p {
 .scrollToEndBtn {
   position: fixed;
   display: none;
-  z-index: 100;
+  z-index: 999;
   right: 2em;
   bottom: 2em;
   cursor: pointer;
   transition: transform 1s;
 }
+.scrollToEndBtn:hover, .scrollToEndBtn:focus {
+  transform: scale(1.1);
+}
+
 .scrollToEndBtn.is-visible {
   display: block;
 }
@@ -599,3 +628,7 @@ footer[role="contentinfo"] p {
     filter: hue-rotate(360deg);
   }
 }
+
+
+
+
