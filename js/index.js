@@ -41,6 +41,7 @@
     
 4.  WORDCOUNT
   4a. Cache approximate words per minute for steady reader and fast reader.
+  4b. Fetch all text from article.
     
 */
 
@@ -252,9 +253,23 @@
             
             wordcount : function () {
                 
-                const steady = (opts.wordcount.steady);
-                const fast = (opts.wordcount.fast);
+                // 4a. 
                 
+                const steady = (opts.wordcount.steady); //200
+                const fast = (opts.wordcount.fast); // 250
+                let $text = (opts.scrollspy.text);  // article text
+                $text = document.querySelectorAll($text);
+                let textPieces = '';
+                
+                // 4b. 
+                
+                $text.forEach(($text, index) => {
+                    textPieces += $text.textContent;    // concatenate
+                });   
+                
+                let wordLength = (textPieces.length);
+                console.log(wordLength);
+                                
                 
             }
 
@@ -287,6 +302,7 @@
         article.accordion();
         article.progressBar();
         article.scrollspy();
+        article.wordcount();
  /*   } catch (e) {
         console.warn("You have some error(s):")
         console.log(e.name);
