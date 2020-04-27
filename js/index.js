@@ -356,6 +356,10 @@
                     
                 });
                 
+            },
+            
+            scrolltoEnd : function () {
+                
             }
 
         }
@@ -388,17 +392,17 @@
     
     let article = doArticle(opts);
 
-   // try {
+   try {
         article.accordion();
         article.progressBar();
         article.scrollspy();
         article.wordcount();
         article.fixedHeading();
- /*   } catch (e) {
+   } catch (e) {
         console.warn("You have some error(s):")
         console.log(e.name);
         console.error(e.name);
-    }*/
+    }
 
 
    

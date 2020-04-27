@@ -242,7 +242,7 @@ progress::-webkit-progress-value {
   font-size: 0;
 }
 .reading-time {
-    border: 1px outset var(--blue);
+    border: 1px outset rgba(0,0,51,.1);
     display: inline-block;
     opacity: .8;
     padding: .2em 1em;
@@ -297,6 +297,7 @@ progress::-webkit-progress-value {
   color: transparent;
   text-shadow: 0 0 2px #eaf8ff;
   text-align: center;
+  text-overflow: ellipsis;
 }
 .heading-temporary.slide span {
   top: 0;
@@ -325,6 +326,7 @@ main {
   position: fixed;
   max-width: 25%;
   padding: 20px;
+  background: rgba(255,255,255,.9);
 }
 .parent-nav {
   border-top: 10px solid var(--black);
@@ -515,9 +517,29 @@ aside[role="complementary"] {
 .post-listing-list-item:first-child {
   border-top: 0;
 }
-
 aside[role="complementary"] .byline-component-aside{
   font-size: 1em;
   letter-spacing: 0;
   margin-top: 7px;
+}
+footer[role="contentinfo"] {
+  display: block;
+  text-align: center;
+  padding: 10px 40px;
+  background: var(--light-grey);
+  border-top: 10px solid var(--blue);
+}
+footer[role="contentinfo"] p {
+  font-size: 2em;
+}
+.scrollToEndBtn {
+  position: fixed;
+  z-index: 100;
+  right: 2em;
+  bottom: 2em;
+  cursor: pointer;
+  transition: transform 1s;
+}
+.scrollToEnd.up {
+  transform: rotate(180deg);
 }
