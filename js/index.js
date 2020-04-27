@@ -385,26 +385,28 @@
                     if (amtScrolled > (1.5 * windowH) && (amtScrolled < (ttlAvailable - windowH))) {
                         // Avoid styling twice
                         !(btn.classList.contains("is-visible")) ? btn.classList += " is-visible" : btn.classList += '';
-                        //!(btn.classList.contains("up")) ? btn.classList += " up" : btn.classList += '';
+                        (btn.classList.contains("up")) ? btn.classList.remove("up") : btn.classList += '';
                         
-                        // Listen for click to send page down
+                        // 6b. Listen for click to send page down
                         btn.addEventListener('click', () => {
                             scroll('down');
                         });
                                                 
-                    } else if (amtScrolled > (ttlAvailable - windowH) && amtScrolled < (ttlAvailable) ) {    // 6b.
+                    }   // viewport at the very base of document
+                    else if (amtScrolled > (ttlAvailable - windowH) && amtScrolled < (ttlAvailable) ) {    // 6b.
                         // rotate button and prime for scrolling down 
                         !(btn.classList.contains("is-visible")) ? btn.classList += " is-visible" : btn.classList += '';
-                        //!(btn.classList.contains("up")) ? btn.classList -= " up" : btn.classList -= '';
-                        scroll('up');
+                        !(btn.classList.contains("up")) ? btn.classList += " up" : btn.classList += '';
+                        
+                        // Listen for click to send page up
+                        btn.addEventListener('click', () => {
+                           scroll('up');  
+                        });
+                       
                     }
                     
                     scroll = (dir) => {    // 
-                        if (dir==='up') {
-
-                        } else {
-                             document.documentElement.scrollTop = ttlAvailable; 
-                        }
+                        (dir==='up') ? document.documentElement.scrollTop = 0 : document.documentElement.scrollTop = ttlAvailable; 
                     }
                 
                 });
