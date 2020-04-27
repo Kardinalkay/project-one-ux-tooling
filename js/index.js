@@ -58,7 +58,9 @@
   6b. Button should be visible but should scroll down if close to document top.
   6c. Button should scroll up if viewport is at the base of document.
    
-7. 
+7. CUSTOM PAGE SLIDER
+  7a. Listen to input on slider and fetch it's value.
+  7b. Express %value of slider as literal approximate pixel value of scrollable height.
   
   
 */
@@ -409,6 +411,39 @@
                 
                 // 6b. 
             
+            },
+            
+            pageSlider : function () {
+                
+                const $slider = document.getElementById(opts.pageSlider.slider);
+
+                let windowH = window.innerHeight;  
+                let documentH = document.documentElement.scrollHeight;  // document Height (must always be inside event)
+                let ttlAvailable = documentH - windowH;  // How much CAN be scrolled
+
+                let amtScrolled = Math.round(window.scrollY);    // amtScrolled
+                    
+                
+                /*The idea is to fetch the value of the slider when dragged. The current value of the slider
+                will be expressed as a percentage. Then this percentage will serve as the same percentage of
+                the page's scrollable Height. Then with native methods like scollTo(), or scrollIntoVieew(),
+                the page will be scrolled to the exact corresponding point by using that percentage to evaluate
+                the window approximate pixel y-position.*/
+                
+                $slider.oninput = () => {
+                    
+                    alert ('working');
+                    
+                    let sliderVal = $slider.value;                    
+                    $sliderPcntVal = sliderVal / 100;   // express value in % terms
+                    
+                    // Express %value of slider as literal approximate pixel value of scrollable height
+                    ttlAvailablePcnt = $sliderPcntVal * ttlAvailable;
+                    
+                    console.log(sliderVal);
+                    
+                };
+                
             }
         }
     }
@@ -438,26 +473,27 @@
         scrollToEnd : {
             btn: '.scrollToEndBtn'
         },
-        customSlider : {
-            slider: '#article-scroller'
+        pageSlider : {
+            slider: 'article-scroller'
         }
     }
     
     let article = doArticle(opts);
 
-    try {
+   /* try {*/
         article.accordion();
         article.progressBar();
         article.scrollspy();
         article.wordcount();
         article.fixedHeading();
         article.scrolltoEnd();
-    } catch (e) {
+        article.pageSlider();
+    /*} catch (e) {
         console.warn("You have some error(s):")
         console.log(e.name);
         console.error(e.name);
     }
-
+*/
 
    
     
