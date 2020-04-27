@@ -48,15 +48,22 @@
   4f. Place the values in the document.
   
 5. FIXED HEADING ON SCROLL
-  5a. Check if heading is in view 
-  5b. Reference the heading and showbox and insert heading inside showbox
-  5c. Display new heading when user scrolls into view
+  5a. Check if heading is in view.
+  5b. Reference the heading and showbox and insert heading inside showbox.
+  5c. Display new heading when user scrolls into view.
+  
+6. SCROLL TO END BUTTON
+  6a. Determine when button will be visible. (Now this is by discretion unlike the other methods.
+        About one and a half times the height of the viewport from the top of document seems apt)
+  
+  
 */
 
 
     const doArticle = function(opts) {
 
-        var sec;
+        const windowH = window.innerHeight;
+
         
         return {
 
@@ -204,7 +211,6 @@
                 // 3a.                
                 let $text = (opts.scrollspy.text);
                 let $subtext = (opts.scrollspy.subtext);                
-                let windowH = window.innerHeight;
                 
                 //console.log($targets);
                 
@@ -310,14 +316,13 @@
                 window.addEventListener('scroll', event =>  {   // listen to scroll on window
                     
                     let $headings = document.querySelectorAll(`${$text}, ${$subtext}`);
-                    let amtScrolled = Math.round(window.scrollY);    // amtScrolled
                     
                     for (let i = 0; i < $headings.length; i++) {
                         
                         let $el = ($headings[i]);
                         
                         let id = $el.id;
-                        console.log($el);
+                        //console.log($el);
                                             
                         let hFromTop = Math.round($el.getBoundingClientRect().top);
                         
@@ -360,6 +365,21 @@
             
             scrolltoEnd : function () {
                 
+                let btn = (opts.scrollToEnd.Btn);
+                
+                window.addEventListener('scroll', event =>  {   // listen to scroll on window
+                    
+                    let amtScrolled = Math.round(window.scrollY);    // amtScrolled
+                    
+                    console.log(amtScrolled);
+                    console.log("windowH ", windowH);
+                
+                    if (amtScrolled > (1.5 * windowH)) {
+                        alert ('o yea');
+                    }
+                
+                });
+                
             }
 
         }
@@ -387,18 +407,22 @@
         },
         fixedHeading : {
             header: '.heading-temporary > span:first-of-type'            
+        },
+        scrollToEnd : {
+            btn: '.scrollToEndBtn'
         }
     }
     
     let article = doArticle(opts);
 
-   try {
+    try {
         article.accordion();
         article.progressBar();
         article.scrollspy();
         article.wordcount();
         article.fixedHeading();
-   } catch (e) {
+        article.scrolltoEnd();
+    } catch (e) {
         console.warn("You have some error(s):")
         console.log(e.name);
         console.error(e.name);

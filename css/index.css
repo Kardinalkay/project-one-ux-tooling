@@ -534,11 +534,15 @@ footer[role="contentinfo"] p {
 }
 .scrollToEndBtn {
   position: fixed;
+  display: none;
   z-index: 100;
   right: 2em;
   bottom: 2em;
   cursor: pointer;
   transition: transform 1s;
+}
+.scrollToEndBtn.is-visible {
+  display: block;
 }
 .scrollToEnd.up {
   transform: rotate(180deg);
