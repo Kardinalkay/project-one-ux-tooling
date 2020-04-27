@@ -289,7 +289,13 @@ progress::-webkit-progress-value {
   background: var(--blue);
   transition: all 1s;
   color: white;
-  font-size: 2.2em;
+  font-family: var(--font-tertiary), sans-serif;
+  text-transform: uppercase;
+  font-weight: lighter;
+  font-size: 1.6em;
+  opacity: 1;
+  color: transparent;
+  text-shadow: 0 0 2px #eaf8ff;
   text-align: center;
 }
 .heading-temporary.slide span {
