@@ -61,6 +61,7 @@
 7. CUSTOM PAGE SLIDER
   7a. Listen to input on slider and fetch it's value.
   7b. Express %value of slider as literal approximate pixel value of scrollable height.
+  7c. Scroll window to approximate pageYOffset pixel.
   
   
 */
@@ -422,7 +423,6 @@
                 let ttlAvailable = documentH - windowH;  // How much CAN be scrolled
 
                 let amtScrolled = Math.round(window.scrollY);    // amtScrolled
-                    
                 
                 /*The idea is to fetch the value of the slider when dragged. The current value of the slider
                 will be expressed as a percentage. Then this percentage will serve as the same percentage of
@@ -431,18 +431,28 @@
                 the window approximate pixel y-position.*/
                 
                 $slider.oninput = () => {
-                    
-                    alert ('working');
-                    
+                                        
                     let sliderVal = $slider.value;                    
-                    $sliderPcntVal = sliderVal / 100;   // express value in % terms
+                    $sliderPcntVal = (sliderVal / 100);   // express value in % terms
                     
-                    // Express %value of slider as literal approximate pixel value of scrollable height
-                    ttlAvailablePcnt = $sliderPcntVal * ttlAvailable;
+                    // 7b. Express %value of slider as literal approximate pixel value of scrollable height
+                    ttlAvailablePxl = ($sliderPcntVal * ttlAvailable).toFixed(2);
+                    
+                    // 7c. Send window to approximate pixel vertical distance
+                    scrollPixel (ttlAvailablePxl);
                     
                     console.log(sliderVal);
                     
                 };
+                
+                scrollPixel = (px) => {
+                    
+                   window.scrollTo({
+                        top: Math.round(px),
+                        left: 0,
+                        behavior: 'smooth'
+                    });
+                }
                 
             }
         }
