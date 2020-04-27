@@ -56,15 +56,13 @@
   6a. Determine when button will be visible. (Now this is by discretion unlike the other methods.
         About one and a half times the height of the viewport from the top of document seems apt)
   6b. Button should be visible but should scroll down if close to document top.
+  6c. Button should scroll up if viewport is at the base of document.
   
   
 */
 
 
     const doArticle = function(opts) {
-
-        const windowH = window.innerHeight;
-
         
         return {
 
@@ -183,7 +181,7 @@
                 
                 let progress = (opts.progressbar.progress);            
                 let $progress = document.querySelector(progress);
-                              
+                                              
                 let windowH = window.innerHeight;   // window Height
                 
                 // 2a. 
@@ -216,6 +214,8 @@
                 //console.log($targets);
                 
                 window.addEventListener('scroll', event =>  {   // listen to scroll on window
+                    
+                    let windowH = window.innerHeight;
                     
                     let $activeLinks = document.querySelectorAll('ul.parent-nav li a.active');
                     const $targets = document.querySelectorAll($text + ', ' + $subtext);
@@ -316,6 +316,8 @@
                                                 
                 window.addEventListener('scroll', event =>  {   // listen to scroll on window
                     
+                    let windowH = window.innerHeight;
+                    
                     let $headings = document.querySelectorAll(`${$text}, ${$subtext}`);
                     
                     for (let i = 0; i < $headings.length; i++) {
@@ -370,25 +372,33 @@
                 
                 window.addEventListener('scroll', event =>  {   // listen to scroll on window
                     
+                    let windowH = window.innerHeight;  
+                    let documentH = document.documentElement.scrollHeight;  // document Height (must always be inside event)
+                    let ttlAvailable = documentH - windowH;  // How much CAN be scrolled
+                    
                     let amtScrolled = Math.round(window.scrollY);    // amtScrolled
                     
-                    // 6a. (1.5 times the viewport's height from the document top)
-                    if (amtScrolled > (1.5 * windowH)) {
-                        let btn = document.querySelector(opts.scrollToEnd.btn);
+                    let btn = document.querySelector(opts.scrollToEnd.btn);
+                    
+                    // 6a. (1.5 times the viewport's height from the document top and not yet at end of document)
+                    if (amtScrolled > (1.5 * windowH) && (amtScrolled < (ttlAvailable - windowH))) {
+                        alert ('o yea');
                         // Avoid styling twice
                         !(btn.classList.contains("is-visible")) ? btn.classList += " is-visible" : btn.classList += '';
-                        //(!btn.classList.contains("is-visible")) ? alert ('yes') : alert ('no');
+                        !(btn.classList.contains("up")) ? btn.classList -= " up" : btn.classList += '';
                                                 
-                    } else {    // 6b.
+                    } else if (amtScrolled > (ttlAvailable - windowH) && amtScrolled < (ttlAvailable) ) {    // 6b.
                         // rotate button and prime for scrolling down 
-                        !(btn.classList.contains("up")) ? btn.classList += " up" : btn.classList += '';
+                        alert ('o no');
+                        !(btn.classList.contains("is-visible")) ? btn.classList += " is-visible" : btn.classList += '';
+                        !(btn.classList.contains("up")) ? btn.classList -= " up" : btn.classList += '';
                     }
                 
                 });
                 
                 // 6b. 
                 
-                scroll (dir) => {    // 
+                scroll = (dir) => {    // 
                     if (dir==='up') {
                         
                     } else {
