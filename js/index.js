@@ -24,20 +24,25 @@
         almost done with the content. This indication will be a delegated CSS class that will
         increase the filter blur on the element as well as increase it's blink rate (animation speed)
     
-  3. SCROLLSPY
-      3a. Loop through every link target ('.article-accordion > li' and .sub-text) and cache. This is 
-          useful becauase the IDs are a bond between the anchor tags <a> and the target. The idea is 
-          to get the IDs of every text or sub-text and tie the connection to the <a> elements. This
-          will be relatively straightforward because the <a> tag already references them with the
-          href attribute.
-      3b. Test if each element is in view but also importantly, out of view. An element is definitely
-          in view if it's offset to the top is 0. This is 
-          the definition of 'in view' in this case, regardless of if the element has an opacity of 0,
-          has visibility hidden or is behind another element. And because the window's pageYOffset 
-          changes on the scroll event, it must be inside the scroll function.
-      3c. For each element that passes the 'in view' test, first 'unstyle' any active link.
-          ii. Then find it's corresponding link in the navigation pane and highlight it.
-      3d. Ensure that only 1 link is styled at a time by halting the loop once a target is in view.
+3. SCROLLSPY
+  3a. Loop through every link target ('.article-accordion > li' and .sub-text) and cache. This is 
+      useful becauase the IDs are a bond between the anchor tags <a> and the target. The idea is 
+      to get the IDs of every text or sub-text and tie the connection to the <a> elements. This
+      will be relatively straightforward because the <a> tag already references them with the
+      href attribute.
+  3b. Test if each element is in view but also importantly, out of view. An element is definitely
+      in view if it's offset to the top is 0. This is 
+      the definition of 'in view' in this case, regardless of if the element has an opacity of 0,
+      has visibility hidden or is behind another element. And because the window's pageYOffset 
+      changes on the scroll event, it must be inside the scroll function.
+  3c. For each element that passes the 'in view' test, first 'unstyle' any active link.
+      ii. Then find it's corresponding link in the navigation pane and highlight it.
+  3d. Ensure that only 1 link is styled at a time by halting the loop once a target is in view.
+    
+4.  WORDCOUNT
+  4a. 
+    
+  
 
 */
 

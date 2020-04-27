@@ -220,9 +220,12 @@ progress::-webkit-progress-value {
 }
 .scroll-indicator {
   animation: progress-glow 5s linear infinite;
+  transition: all 1s;
+    transform-origin: left center;
 }
 .scroll-indicator.concluding {
   animation-duration: 4s;
+  transform: scale(1.05);
 }
 @keyframes progress-glow {
   0%, 100% {
@@ -237,6 +240,11 @@ progress::-webkit-progress-value {
   width: 50%;
   height: 100%;
   font-size: 0;
+}
+.scroll-container {
+    position: absolute;
+    right: 1em;
+    top: 2em;
 }
 .scroll-widget .trans-logo{
   position: absolute;
