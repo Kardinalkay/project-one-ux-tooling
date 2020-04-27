@@ -46,7 +46,11 @@
   4d. Remove whitespace as a result of HTML.
   4e. Compute time by dividing total words by approximate reading time / min.
   4f. Place the values in the document.
-    
+  
+5. FIXED HEADING ON SCROLL
+  5a. Check if heading is in view 
+  5b. Reference the heading and showbox and insert heading inside showbox
+  5c. Display new heading when user scrolls into view
 */
 
 
@@ -159,7 +163,7 @@
                         window.scrollTo({
                             top: Math.round($scrollIntoView) - 145, // 1j.
                             left: 0,
-                            behaviour: 'smooth'
+                            behavior: 'smooth'
                         });
                                                 
                     };
@@ -208,9 +212,7 @@
                     
                     let $activeLinks = document.querySelectorAll('ul.parent-nav li a.active');
                     const $targets = document.querySelectorAll($text + ', ' + $subtext);
-                    
-                    let documentH = document.documentElement.scrollHeight;  // document Height (must always be inside event)
-                    
+                                        
                     let amtScrolled = Math.round(window.scrollY);    // amtScrolled
 
                     for (let i = 0; i < $targets.length; i++) {
@@ -296,9 +298,63 @@
                 
                 steadyElm.innerText = steadyTime + 'minutes';
                 fastElm.innerText = fastTime + 'minutes';
-
                 
-                                
+            },
+            
+            fixedHeading : function () {
+                
+                // Select the headings
+                $text = opts.scrollspy.text;
+                $subtext = opts.scrollspy.subtext;
+                                                
+                window.addEventListener('scroll', event =>  {   // listen to scroll on window
+                    
+                    let $headings = document.querySelectorAll(`${$text}, ${$subtext}`);
+                    let amtScrolled = Math.round(window.scrollY);    // amtScrolled
+                    
+                    for (let i = 0; i < $headings.length; i++) {
+                        
+                        let $el = ($headings[i]);
+                        
+                        let id = $el.id;
+                        console.log($el);
+                                            
+                        let hFromTop = Math.round($el.getBoundingClientRect().top);
+                        
+                        // Check if heading is in view 
+                        
+                        if (hFromTop > 125 && hFromTop < 165) { // title in view?
+                            
+                            let headingTitle = '';  
+                            // Cater for inconsistency in DOM in order to fetch necessary title
+                            if ($el.classList.contains('sub-text')) {//reference heading title
+                                headingTitle = $el.children[0].textContent;
+
+                            } else {
+                                headingTitle = ($el.children[0].children[0].children[0]).textContent;
+                            }
+
+                            //console.log(headingTitle);
+                            //reference showbox
+                            const $temporaryHeader = document.querySelector(opts.fixedHeading.header);
+                            
+                            $temporaryHeader.innerText = headingTitle;
+                            // 5c. Display new heading when user scrolls into view
+                            if (!$temporaryHeader.parentElement.classList.contains("slide")) {  // Ensure not to apply the class twice
+                                $temporaryHeader.parentElement.classList += " slide"; 
+                            }
+                                                        
+                           // break;
+                           
+                        } else if (hFromTop > 145) {
+                            
+                           // remove class 
+                            
+                        }
+                        
+                    }
+                    
+                });
                 
             }
 
@@ -324,6 +380,9 @@
             fast: 250,
             steadyElm: '#steady-reader',
             fastElm: '#fast-reader'
+        },
+        fixedHeading : {
+            header: '.heading-temporary > span:first-of-type'            
         }
     }
     
@@ -334,6 +393,7 @@
         article.progressBar();
         article.scrollspy();
         article.wordcount();
+        article.fixedHeading();
  /*   } catch (e) {
         console.warn("You have some error(s):")
         console.log(e.name);

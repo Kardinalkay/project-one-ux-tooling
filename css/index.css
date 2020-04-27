@@ -272,6 +272,35 @@ progress::-webkit-progress-value {
   opacity: .4;
   transform: rotate(-45deg);
 }
+.heading-temporary{
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  top: 20px;
+  overflow: hidden;
+  height: 50px;
+}
+.heading-temporary span {
+  display: block;
+  position: relative;
+  top: -100%;
+  height: inherit;
+  border: 2px solid black;
+  background: var(--blue);
+  transition: all 1s;
+  color: white;
+  font-family: var(--font-tertiary), sans-serif;
+  text-transform: uppercase;
+  font-weight: lighter;
+  font-size: 1.6em;
+  opacity: 1;
+  color: transparent;
+  text-shadow: 0 0 2px #eaf8ff;
+  text-align: center;
+}
+.heading-temporary.slide span {
+  top: 0;
+} 
 #result {
   position: absolute;
   right: 15em;
