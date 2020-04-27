@@ -177,6 +177,10 @@ header[role=banner] .fa-search {
   position: relative;
   z-index: 0;
 }
+
+
+/*progress bar*/
+
 progress::-webkit-progress-bar {
     background-color: var(--blue);
 }
@@ -227,20 +231,16 @@ progress::-webkit-progress-value {
   animation-duration: 4s;
   transform: scale(1.05);
 }
-@keyframes progress-glow {
-  0%, 100% {
-    filter: hue-rotate(0deg);
-  }
-  50% {
-    filter: hue-rotate(360deg);
-  }
-}
+
 .progress-bar {
   display: block;
   width: 50%;
   height: 100%;
   font-size: 0;
 }
+
+/*reading time*/
+
 .reading-time {
     border: 1px outset rgba(0,0,51,.1);
     display: inline-block;
@@ -259,10 +259,42 @@ progress::-webkit-progress-value {
   font-kerning: auto;
   color: var(--blue);
 }
+
+
+/*slider*/
+
 .scroll-container {
     position: absolute;
     right: 1em;
     top: 2em;
+}
+.slider {
+  -webkit-appearance: none;
+  appearance:none;
+  width: 18em;
+  height: .1em;
+  background: rgba(0,0,0,.8);
+  outline: none;
+  opacity: 0.8;
+  transition: opacity .5s;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,.3);
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 3%;
+  height: .5em;
+  background: var(--blue);
+  cursor: pointer;
+  box-shadow: 1px 2px 1px rgba(0,0,0,.3);
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: var(--blue);
+  cursor: pointer;
 }
 .scroll-widget .trans-logo{
   position: absolute;
@@ -517,11 +549,19 @@ aside[role="complementary"] {
 .post-listing-list-item:first-child {
   border-top: 0;
 }
+
+
+/*sidebar*/
+
 aside[role="complementary"] .byline-component-aside{
   font-size: 1em;
   letter-spacing: 0;
   margin-top: 7px;
 }
+
+
+/*footer*/
+
 footer[role="contentinfo"] {
   display: block;
   text-align: center;
@@ -546,4 +586,16 @@ footer[role="contentinfo"] p {
 }
 .scrollToEndBtn.up {
   transform: rotate(180deg);
+}
+
+
+/*animations*/
+
+@keyframes progress-glow {
+  0%, 100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(360deg);
+  }
 }

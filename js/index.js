@@ -57,6 +57,8 @@
         About one and a half times the height of the viewport from the top of document seems apt)
   6b. Button should be visible but should scroll down if close to document top.
   6c. Button should scroll up if viewport is at the base of document.
+   
+7. 
   
   
 */
@@ -202,7 +204,6 @@
                     (progressWidth > 80) ? $progress.className = 'scroll-indicator concluding' : $progress.className = 'scroll-indicator';
                     
                 });
-            
             },
             
             scrollspy : function () {
@@ -254,14 +255,9 @@
                             
                             // 3d.
                             break;
-                           
                         }
-                       
                     }; 
-                
-                    
                 });
-                
             },
             
             wordcount : function () {
@@ -379,7 +375,7 @@
                     let amtScrolled = Math.round(window.scrollY);    // amtScrolled
                     
                     let btn = document.querySelector(opts.scrollToEnd.btn);
-                    console.log(btn);
+                    //console.log(btn);
                     
                     // 6a. (1.5 times the viewport's height from the document top and not yet at end of document)
                     if (amtScrolled > (1.5 * windowH) && (amtScrolled < (ttlAvailable - windowH))) {
@@ -414,9 +410,7 @@
                 // 6b. 
             
             }
-
         }
-
     }
     
     const opts = {
@@ -443,6 +437,9 @@
         },
         scrollToEnd : {
             btn: '.scrollToEndBtn'
+        },
+        customSlider : {
+            slider: '#article-scroller'
         }
     }
     
