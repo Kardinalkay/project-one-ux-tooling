@@ -46,6 +46,9 @@
   4d. Remove whitespace as a result of HTML.
   4e. Compute time by dividing total words by approximate reading time / min.
   4f. Place the values in the document.
+  
+5. FIXED HEADING ON SCROLL
+  5a. Check if heading is in view 
     
 */
 
@@ -208,9 +211,7 @@
                     
                     let $activeLinks = document.querySelectorAll('ul.parent-nav li a.active');
                     const $targets = document.querySelectorAll($text + ', ' + $subtext);
-                    
-                    let documentH = document.documentElement.scrollHeight;  // document Height (must always be inside event)
-                    
+                                        
                     let amtScrolled = Math.round(window.scrollY);    // amtScrolled
 
                     for (let i = 0; i < $targets.length; i++) {
@@ -296,9 +297,46 @@
                 
                 steadyElm.innerText = steadyTime + 'minutes';
                 fastElm.innerText = fastTime + 'minutes';
-
                 
-                                
+            },
+            
+            fixedHeading : function () {
+                
+                // Select the headings
+                $text = opts.scrollspy.text;
+                $subtext = opts.scrollspy.subtext;
+                                                
+                window.addEventListener('scroll', event =>  {   // listen to scroll on window
+                    
+                    let $headings = document.querySelectorAll(`${$text}, ${$subtext}`);
+                    let amtScrolled = Math.round(window.scrollY);    // amtScrolled
+                    
+                    for (let i = 0; i < $headings.length; i++) {
+                        
+                        let el = ($headings[i]);
+                        
+                        let id = el.id;
+                                            
+                        let hFromTop = Math.round(el.getBoundingClientRect().top);
+                        
+                        // Check if heading is in view 
+                        
+                        if (hFromTop > 125 && hFromTop < 145) { 
+
+                            let headingTitle = $target.children[0].children[0];
+                            
+
+                            break;
+                           
+                        } else if (hFromTop > 145) {
+                            
+                           // remove class 
+                            
+                        }
+                        
+                    }
+                    
+                });
                 
             }
 
@@ -324,6 +362,9 @@
             fast: 250,
             steadyElm: '#steady-reader',
             fastElm: '#fast-reader'
+        },
+        fixedHeading : {
+            
         }
     }
     
@@ -334,6 +375,7 @@
         article.progressBar();
         article.scrollspy();
         article.wordcount();
+        article.fixedHeading();
  /*   } catch (e) {
         console.warn("You have some error(s):")
         console.log(e.name);
