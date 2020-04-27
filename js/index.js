@@ -55,6 +55,7 @@
 6. SCROLL TO END BUTTON
   6a. Determine when button will be visible. (Now this is by discretion unlike the other methods.
         About one and a half times the height of the viewport from the top of document seems apt)
+  6b. Button should be visible but should scroll down if close to document top.
   
   
 */
@@ -371,14 +372,29 @@
                     
                     let amtScrolled = Math.round(window.scrollY);    // amtScrolled
                     
-                    console.log(amtScrolled);
-                    console.log("windowH ", windowH);
-                
+                    // 6a. (1.5 times the viewport's height from the document top)
                     if (amtScrolled > (1.5 * windowH)) {
-                        alert ('o yea');
+                        let btn = document.querySelector(opts.scrollToEnd.btn);
+                        // Avoid styling twice
+                        !(btn.classList.contains("is-visible")) ? btn.classList += " is-visible" : btn.classList += '';
+                        //(!btn.classList.contains("is-visible")) ? alert ('yes') : alert ('no');
+                                                
+                    } else {    // 6b.
+                        // rotate button and prime for scrolling down 
+                        !(btn.classList.contains("up")) ? btn.classList += " up" : btn.classList += '';
                     }
                 
                 });
+                
+                // 6b. 
+                
+                scroll (dir) => {    // 
+                    if (dir==='up') {
+                        
+                    } else {
+                        
+                    }
+                }
                 
             }
 
