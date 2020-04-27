@@ -48,15 +48,21 @@
   4f. Place the values in the document.
   
 5. FIXED HEADING ON SCROLL
-  5a. Check if heading is in view 
-  5b. Reference the heading and showbox and insert heading inside showbox
-  5c. Display new heading when user scrolls into view
+  5a. Check if heading is in view.
+  5b. Reference the heading and showbox and insert heading inside showbox.
+  5c. Display new heading when user scrolls into view.
+  
+6. SCROLL TO END BUTTON
+  6a. Determine when button will be visible. (Now this is by discretion unlike the other methods.
+        About one and a half times the height of the viewport from the top of document seems apt)
+  6b. Button should be visible but should scroll down if close to document top.
+  6c. Button should scroll up if viewport is at the base of document.
+  
+  
 */
 
 
     const doArticle = function(opts) {
-
-        var sec;
         
         return {
 
@@ -175,7 +181,7 @@
                 
                 let progress = (opts.progressbar.progress);            
                 let $progress = document.querySelector(progress);
-                              
+                                              
                 let windowH = window.innerHeight;   // window Height
                 
                 // 2a. 
@@ -204,11 +210,12 @@
                 // 3a.                
                 let $text = (opts.scrollspy.text);
                 let $subtext = (opts.scrollspy.subtext);                
-                let windowH = window.innerHeight;
                 
                 //console.log($targets);
                 
                 window.addEventListener('scroll', event =>  {   // listen to scroll on window
+                    
+                    let windowH = window.innerHeight;
                     
                     let $activeLinks = document.querySelectorAll('ul.parent-nav li a.active');
                     const $targets = document.querySelectorAll($text + ', ' + $subtext);
@@ -309,15 +316,16 @@
                                                 
                 window.addEventListener('scroll', event =>  {   // listen to scroll on window
                     
+                    let windowH = window.innerHeight;
+                    
                     let $headings = document.querySelectorAll(`${$text}, ${$subtext}`);
-                    let amtScrolled = Math.round(window.scrollY);    // amtScrolled
                     
                     for (let i = 0; i < $headings.length; i++) {
                         
                         let $el = ($headings[i]);
                         
                         let id = $el.id;
-                        console.log($el);
+                        //console.log($el);
                                             
                         let hFromTop = Math.round($el.getBoundingClientRect().top);
                         
@@ -356,6 +364,55 @@
                     
                 });
                 
+            },
+            
+            scrolltoEnd : function () {
+                
+                let btn = (opts.scrollToEnd.Btn);
+                
+                window.addEventListener('scroll', event =>  {   // listen to scroll on window
+                    
+                    let windowH = window.innerHeight;  
+                    let documentH = document.documentElement.scrollHeight;  // document Height (must always be inside event)
+                    let ttlAvailable = documentH - windowH;  // How much CAN be scrolled
+                    
+                    let amtScrolled = Math.round(window.scrollY);    // amtScrolled
+                    
+                    let btn = document.querySelector(opts.scrollToEnd.btn);
+                    console.log(btn);
+                    
+                    // 6a. (1.5 times the viewport's height from the document top and not yet at end of document)
+                    if (amtScrolled > (1.5 * windowH) && (amtScrolled < (ttlAvailable - windowH))) {
+                        // Avoid styling twice
+                        !(btn.classList.contains("is-visible")) ? btn.classList += " is-visible" : btn.classList += '';
+                        (btn.classList.contains("up")) ? btn.classList.remove("up") : btn.classList += '';
+                        
+                        // 6b. Listen for click to send page down
+                        btn.addEventListener('click', () => {
+                            scroll('down');
+                        });
+                                                
+                    }   // viewport at the very base of document
+                    else if (amtScrolled > (ttlAvailable - windowH) && amtScrolled < (ttlAvailable) ) {    // 6b.
+                        // rotate button and prime for scrolling down 
+                        !(btn.classList.contains("is-visible")) ? btn.classList += " is-visible" : btn.classList += '';
+                        !(btn.classList.contains("up")) ? btn.classList += " up" : btn.classList += '';
+                        
+                        // Listen for click to send page up
+                        btn.addEventListener('click', () => {
+                           scroll('up');  
+                        });
+                       
+                    }
+                    
+                    scroll = (dir) => {    // 
+                        (dir==='up') ? document.documentElement.scrollTop = 0 : document.documentElement.scrollTop = ttlAvailable; 
+                    }
+                
+                });
+                
+                // 6b. 
+            
             }
 
         }
@@ -383,22 +440,26 @@
         },
         fixedHeading : {
             header: '.heading-temporary > span:first-of-type'            
+        },
+        scrollToEnd : {
+            btn: '.scrollToEndBtn'
         }
     }
     
     let article = doArticle(opts);
 
-   // try {
+    try {
         article.accordion();
         article.progressBar();
         article.scrollspy();
         article.wordcount();
         article.fixedHeading();
- /*   } catch (e) {
+        article.scrolltoEnd();
+    } catch (e) {
         console.warn("You have some error(s):")
         console.log(e.name);
         console.error(e.name);
-    }*/
+    }
 
 
    
