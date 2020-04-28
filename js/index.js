@@ -443,7 +443,6 @@
                         throw Error(`${ttlAvailable} should be a number`);
                     } 
                     
-                    alert ('working');
                     // 7c. Send window to approximate pixel vertical distance
                     scrollPixel (ttlAvailablePxl);
                                         
