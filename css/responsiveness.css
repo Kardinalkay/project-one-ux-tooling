@@ -66,8 +66,9 @@
 
 	.nav-article {
 		grid-column: 1 / span 4;
+        display: block;
 		max-width: 33%;	
-		display: block;
+		z-index: 2;
 	}
 	.parent-nav {
 	  border-top: 10px solid var(--black);
