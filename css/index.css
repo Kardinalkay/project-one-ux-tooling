@@ -75,6 +75,8 @@ strong, em {
   white-space: nowrap;
   border: 0;
 }
+
+
 /*Link styles*/
 a {
    color: var(--link);
@@ -103,6 +105,7 @@ nav a:active, nav a.active {
   text-shadow: 1px 0 1px rgba(0,0,0,.3);
 }
 
+
 /*Lists*/
 ul, ol {
   list-style: none;
@@ -124,9 +127,7 @@ h3 {
 }
 
 
-
 /*document*/
-
 .page {
   width: 100%;
   padding-top: 145px;
@@ -178,7 +179,6 @@ header[role=banner] .fa-search {
 
 
 /*progress bar*/
-
 progress::-webkit-progress-bar {
     background-color: var(--blue);
 }
@@ -229,7 +229,6 @@ progress::-webkit-progress-value {
   animation-duration: 4s;
   transform: scale(1.05);
 }
-
 .progress-bar {
   display: block;
   width: 50%;
@@ -237,8 +236,8 @@ progress::-webkit-progress-value {
   font-size: 0;
 }
 
-/*reading time*/
 
+/*reading time*/
 .reading-time {
   display: none;
   border: 1px outset rgba(0,0,51,.1);
@@ -246,7 +245,7 @@ progress::-webkit-progress-value {
   opacity: .8;
   padding: .2em 1em;
   font-size: .7em;
-  background: rgba(222,180,6,.1);
+  background: rgba(222,180,6,.5);
 }
 .reading-time p {
   color: var(--blue);
@@ -261,7 +260,6 @@ progress::-webkit-progress-value {
 
 
 /*slider*/
-
 .scroll-container {
     display: none;
     position: absolute;
@@ -356,11 +354,9 @@ main {
   background: rgba(255,255,255,.8);
 }
 .nav-article {
-  /grid-column: 1 / span 3;
   grid-column: 1 / -1;
   position: fixed;
   display: none;
-  /max-width: 25%;
   padding: 20px;
   background: rgba(255,255,255,.9);
 }
@@ -393,7 +389,6 @@ main {
   padding: 0 20px;
 }
 aside[role="complementary"] {
-  /grid-column: 10 / span 3;
   grid-column: 1 / -1;
   position: relative;
   padding: 20px 40px;
@@ -401,8 +396,8 @@ aside[role="complementary"] {
   background: rgb(255,255,255);
 }
 
-/*article*/
 
+/*article*/
 .content-header {
   margin: 0 0 5px;
 }
@@ -417,7 +412,6 @@ aside[role="complementary"] {
   line-height: 12px;
   font-style: normal;
   font-weight: 400;
-  text-transform: uppercase;
   text-decoration: none;
   text-transform: uppercase;
   display: inline-block;
@@ -452,7 +446,6 @@ aside[role="complementary"] {
   color: #000;
   font-size: 36px;
   line-height: 38px;
-  margin: 0 0 50px;
   font-style: normal;
   font-weight: 200;
   letter-spacing: .0075em;
@@ -547,7 +540,6 @@ aside[role="complementary"] {
 .post-listing-item:hover {
   outline: thin solid black;
 }
-
 .post-list-link {
   display: flex;
   flex-flow: row nowrap;
@@ -577,7 +569,6 @@ aside[role="complementary"] {
 
 
 /*sidebar*/
-
 aside[role="complementary"] .byline-component-aside{
   font-size: 1em;
   letter-spacing: 0;
@@ -586,7 +577,6 @@ aside[role="complementary"] .byline-component-aside{
 
 
 /*footer*/
-
 footer[role="contentinfo"] {
   display: block;
   text-align: center;
@@ -609,7 +599,6 @@ footer[role="contentinfo"] p {
 .scrollToEndBtn:hover, .scrollToEndBtn:focus {
   transform: scale(1.1);
 }
-
 .scrollToEndBtn.is-visible {
   display: block;
 }
@@ -619,7 +608,6 @@ footer[role="contentinfo"] p {
 
 
 /*animations*/
-
 @keyframes progress-glow {
   0%, 100% {
     filter: hue-rotate(0deg);

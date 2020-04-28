@@ -12,9 +12,9 @@
         <meta name="distribution" content="global"> <!--Can section to certain countries or regions-->
         <meta name="resource-type" content="document">
         <meta name="author" content="Humber">
-        <meta name="revised" content="Humber Blackboard, 22/04/2020">    <!--Last time document was updated-->
+        <meta name="revised" content="Humber Blackboard, 27/04/2020">    <!--Last time document was updated-->
 
-        <title>Article Components</title>
+        <title>Article Components (WDDM - 113) - Humber</title>
 
         <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Khand:wght@300;500&display=swap" rel="stylesheet">
@@ -43,8 +43,8 @@
 
                 <div class="scroll-widget">
 
-                    <label for="scroll-indicator" class="visually-hidden">Scroll indicator:</label>
-                    <progress id="scroll-indicator" class="scroll-indicator" role="progressbar" aria-busy="true" value="0" max="100" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">              
+                    <label for="scroll-indicator" class="visually-hidden" aria-hidden="true" aria-labelledby="">Scroll indicator:</label>
+                    <progress id="scroll-indicator" class="scroll-indicator" role="progressbar" aria-live="polite" value="0" max="100" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">              
                         <div class="progress">
                           <span class="progress-bar"></span>
                         </div>
@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="scroll-container">
-                        <input type="range" min="1" max="100" value="0" class="slider" id="article-scroller">
+                        <input aria-live="polite" type="range" min="1" max="100" value="0" class="slider" id="article-scroller">
                     </div>
 
                     <img class="trans-logo" src="img/humber-logo-trans.png">
@@ -258,11 +258,9 @@
                                             <h3>Create Personas and Use-Case Scenarios</h3>
 
                                             <article class="content">
-
                                                 <p>The creation of a representative user based on available data and user interviews. Though the personal details of the persona may be semi-fiction, the information used to create the user type is not. The persona makes the <abbr title="user interface / user experience">UI/UX</abbr> designer model the ideal user for an application or software. User personas are extremely useful to grow and improve a business: they help uncover the different ways people search for, buy, and use products, so you can focus your efforts on improving the experience for real people and use cases.</p>
                                                 <p>The user persona gives the designer a consistent reference before he veers of course in the project and start interpreting his own skewed perspective in milestones. The user persona also brings the whole team on the same page; there is no chance for unconscious dissidence. And if the app launch or marketing tweak is not successful, the user persona makes it easier to pinpoint flaws, and easily make adjustments.</p>
-                                                <p>A user persona starts with a survey and can begin with you describing yourself (or your company) in. For example <q>We are a company that grows different kinds of herbs in Ontario and do herbal treatments</q>. It doesn't get any simpler.</p>                                     
-
+                                                <p>A user persona starts with a survey and can begin with you describing yourself (or your company) in. For example <q>We are a company that grows different kinds of herbs in Ontario and do herbal treatments</q>. It doesn't get any simpler.</p>   
                                             </article>
 
                                         </li>
@@ -331,6 +329,7 @@
                         <li id="sketches-and-wireframes">
 
                             <article class="body-component">
+                                
                                 <a href="#"><h3 class="article-heading">Make sketches, wireframes and prototypes</h3><span class="arrow">X</span></a>
 
                                 <section class="text">             

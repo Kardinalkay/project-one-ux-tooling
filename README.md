@@ -1,4 +1,4 @@
-# PROJECT: UX TOOLING
+# PROJECT: UX TOOLING : IBIYEMI KAYODE
 **CREATING DROP-IN UI COMPONENTS AND TOOLS TO IMPROVE THE USER EXPERIENCE OF AN ARTICLE**
 
 ---
@@ -10,7 +10,7 @@ The aim of this project is to enhance the functionality, experiment with new or 
 
 ## Setup
 
-An article page would be built with HTML and CSS which is at least 5 times longer than the height of the user agent's viewport.
+An article page wILL be built with HTML and CSS which is at least 5 times longer than the height of the user agent's viewport.
 
 
 ## General Guide
@@ -18,7 +18,7 @@ An article page would be built with HTML and CSS which is at least 5 times longe
 
 ### Objective 1: Scroll progress indicator
 
-**Goal:** A visual progress indicator will be created to give user estimate on his progress on an the article.
+**Goal:** A visual progress indicator will be created to give user estimate on his progress on the article.
 
 Bonus: 
 
@@ -30,33 +30,40 @@ Bonus:
 
 ### Objective 2: Progress title
 
-**Goal:** The main title of the document is to remain in view at all times.
+**Goal:** The main title  of the document is to remain in view at all times.
 
-Bonus: 1. 
+Bonus: 
 
-The article in this project will contain sub-topics and once a sub-topic heading is out of view, it will flash for every 5 minutes
-the user is absent-minded.
+1.  The article in this project will contain sub-topics. All topics and sub-topics will be treated as independent titles and hooked onto the screen after scrolled out of sight. 
 
 ### Objective 3: Word count
 
 **Goal:** Average reading time to be counted. 
 
-Bonus: 1. There is the average reading speed; however there are users who categorise themselves as fast or slow readers. Application will compute reading time estimate for the fast, slow and average reader.
+Bonus: 
+
+1. There is the average reading speed; however there are users who categorise themselves as fast or slow readers. Application will compute reading time estimate for the fast, slow and average reader.
 
 ### Objective 4: Scroll Spy
 
 **Goal:** Method will be designed to represent user's progress through the long article, such that they can easily view the article's outline 
-		  and move a desired portion of the document into the viewport at any time.  
+		  and move a desired portion of the document into the viewport at any time. 
+
+Bonus: 
+
+1. A closed accordion panel will not prevent the link from working: A click on the navigation menu item will activate accordion panels without user interference, before finalising reference to corresponding article.	  
 
 ### Objective 5: Content reveal (accordion)
 
 **Goal:** A component will be designed to guide a user through content that is split into multiple parts. Content of article will be made deliberately long to accomplish this task.
 
-### Objective 6: Scroll-up button (accordion)
+### Objective 6: Scroll-up button
 
 **Goal:** As a result of creating a long article page, a scrollup button is ideal to enhance user experience; saving time to navigate to either top or bottom of document.
 
-Bonus : 1. Create a unique scroll-up button that scrolls to middle of page, then mutates into two: any click on either of these buttons will take
+Bonus : 
+
+1. Create a unique scroll-up button that scrolls to middle of page, then mutates into two: any click on either of these buttons will take
 			user to either top or bottom of the page and re-squash into one.
 
 ### Objective 7: New content engagement (aka, "infinite" content)

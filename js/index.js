@@ -154,8 +154,8 @@
                         // But if it was parent link that was clicked, no need to climb the DOM because it links 
                         if ($activeLink[i].parentNode.parentNode.classList.contains('parent-nav')) {   // test if parent link
                             $accTab = $target.children[0].children[0];
-                            console.log($bodyComponent);
-                            console.log($accTab);
+                            /*console.log($bodyComponent);
+                            console.log($accTab);*/
                                                     
                         } else {
                             $accTab = $target.parentNode.parentNode.previousElementSibling;
@@ -443,11 +443,10 @@
                         throw Error(`${ttlAvailable} should be a number`);
                     } 
                     
+                    alert ('working');
                     // 7c. Send window to approximate pixel vertical distance
                     scrollPixel (ttlAvailablePxl);
-                    
-                    console.log(sliderVal);
-                    
+                                        
                 };
                 
                 window.addEventListener('scroll', () => {
@@ -461,7 +460,8 @@
                     let ttlAvailable = documentH - windowH;  
                     
                     let amtScrolledPcnt = ((amtScrolled / ttlAvailable).toFixed(2) * 100);
-                    
+                    $slider.value = amtScrolledPcnt;
+                                        
                 });
                 
                 scrollPixel = (px) => {
@@ -509,7 +509,7 @@
     
     let article = doArticle(opts);
 
-   /* try {*/
+   try {
         article.accordion();
         article.progressBar();
         article.scrollspy();
@@ -517,12 +517,12 @@
         article.fixedHeading();
         article.scrolltoEnd();
         article.pageSlider();
-    /*} catch (e) {
+    } catch (e) {
         console.warn("You have some error(s):")
         console.log(e.name);
         console.error(e.name);
     }
-*/
+
 
    
     

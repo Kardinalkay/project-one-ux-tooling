@@ -9,7 +9,6 @@
 	.heading-temporary {
 	  position: absolute;
 	  width: 100%;
-	  left: 0;
 	  right: 0;
 	  top: 16px;
 	  left: auto;
@@ -43,6 +42,7 @@
 	    position: static;
 	    right: auto;
 	    top: 0;
+	    background: rgba(222,180,6,.1);
 	}
 	.heading-temporary {
 		left: auto;
@@ -52,7 +52,6 @@
 	.heading-temporary span {
 		font-size: 1.1em;
 		color: transparent;
-		/top: 18px;
 		text-shadow: 0 0 2px #eaf8ff;
 	}
 	.scroll-widget .trans-logo{
@@ -67,7 +66,7 @@
 
 	.nav-article {
 		grid-column: 1 / span 4;
-		max-width: 25%;	
+		max-width: 33%;	
 		display: block;
 	}
 	.parent-nav {
@@ -84,14 +83,10 @@
 	}
 	aside[role="complementary"] { 
 		grid-column: 1 / -1;
-		padding: 0;
+		padding: 40px 0 ;
 		z-index: 0;
 	}
-
-
-
-
-	footer[role="contentinfo"] {
+    footer[role="contentinfo"] {
 		position: relative;
 		z-index: 1;
 	}
@@ -126,16 +121,16 @@
 	.article-accordion {
 	  font-size: 1.0em;
 	}
-
-
 	.nav-article {
 		grid-column: 1 / span 3;
+		max-width: 25%;	
 	}
 	.article-content{
 	  grid-column: 4 / span 6;
 	}
 	aside[role="complementary"] { 
 		grid-column: 10 / span 3;
+		padding-top: 0;
 		background: rgba(0,0,0,0);
 	}
 
